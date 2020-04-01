@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5396efea-ea06-45c4-b8a3-02858c9824fc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/front" />
+  </component>
+  <component name="ProjectId" id="1ZpMOTXdW6t92CFfouypzGt8jDE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="mtgblueprint" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="runserver 127.0.0.1:8001" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="mtgblueprint" />
+      <option name="INTERPRETER_OPTIONS" value="runserver 127.0.0.1:8001" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5396efea-ea06-45c4-b8a3-02858c9824fc" name="Default Changelist" comment="" />
+      <created>1585531549950</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585531549950</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="418" y="189" width="1084" height="718" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585532713968">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state x="418" y="189" width="1084" height="718" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1585532713968" />
+    <state width="1897" height="264" key="GridCell.Tab.0.bottom" timestamp="1585535838770">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="1897" height="264" key="GridCell.Tab.0.bottom/0.27.1920.1010@0.27.1920.1010" timestamp="1585535838770" />
+    <state width="1897" height="264" key="GridCell.Tab.0.center" timestamp="1585535838769">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="1897" height="264" key="GridCell.Tab.0.center/0.27.1920.1010@0.27.1920.1010" timestamp="1585535838769" />
+    <state width="1897" height="264" key="GridCell.Tab.0.left" timestamp="1585535838763">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="1897" height="264" key="GridCell.Tab.0.left/0.27.1920.1010@0.27.1920.1010" timestamp="1585535838763" />
+    <state width="1897" height="264" key="GridCell.Tab.0.right" timestamp="1585535838769">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="1897" height="264" key="GridCell.Tab.0.right/0.27.1920.1010@0.27.1920.1010" timestamp="1585535838769" />
+    <state x="616" y="359" key="com.intellij.ide.util.TipDialog" timestamp="1585531616773">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state x="616" y="359" key="com.intellij.ide.util.TipDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1585531616773" />
+    <state x="841" y="327" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey" timestamp="1585532697035">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state x="841" y="327" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey/0.27.1920.1010@0.27.1920.1010" timestamp="1585532697035" />
+  </component>
+</project>
