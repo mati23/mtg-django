@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5396efea-ea06-45c4-b8a3-02858c9824fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/card.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front" beforeDir="false" afterPath="$PROJECT_DIR$/front" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mtgblueprint/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mtgblueprint/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,7 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/front" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ZpMOTXdW6t92CFfouypzGt8jDE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -23,6 +30,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -102,10 +110,15 @@
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
     <state width="1897" height="264" key="GridCell.Tab.0.right/0.27.1920.1010@0.27.1920.1010" timestamp="1585535838769" />
-    <state x="616" y="359" key="com.intellij.ide.util.TipDialog" timestamp="1585531616773">
-      <screen x="0" y="27" width="1920" height="1010" />
+    <state x="449" y="187" key="SettingsEditor" timestamp="1585789898724">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="449" y="187" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1585789898724" />
+    <state x="616" y="373" key="com.intellij.ide.util.TipDialog" timestamp="1585789888969">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="616" y="359" key="com.intellij.ide.util.TipDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1585531616773" />
+    <state x="616" y="373" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1585789888969" />
     <state x="841" y="327" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey" timestamp="1585532697035">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
