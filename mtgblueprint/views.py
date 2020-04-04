@@ -16,5 +16,5 @@ class SetsViewSet(viewsets.ModelViewSet):
 
 
 class CardsViewSet(viewsets.ModelViewSet):
-    queryset = Cards.objects.all()
+    queryset = Cards.objects.all()[:10]
     serializer_class = CardSerializer
