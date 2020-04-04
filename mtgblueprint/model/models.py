@@ -57,36 +57,28 @@ class Sets(models.Model):
         app_label = 'sets'
 
 
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=150)
+class SetTranslations(models.Model):
+    language = models.CharField(max_length=19, blank=True, null=True)
+    # Field name made lowercase.
+    setcode = models.ForeignKey(
+        Sets, models.DO_NOTHING, db_column='setCode', to_field='code')
+    translation = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'auth_group'
-        app_label = 'auth_group'
+        db_table = 'set_translations'
+        app_label = 'set_translations'
 
 
-class AuthGroupPermissions(models.Model):
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group_permissions'
-        app_label = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
-
-
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
+class DjangoContentType(models.Model):
+    app_label = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
 
     class Meta:
         managed = False
-        db_table = 'auth_permission'
-        app_label = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
+        db_table = 'django_content_type'
+        app_label = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
 
 
 class AuthUser(models.Model):
@@ -105,6 +97,54 @@ class AuthUser(models.Model):
         managed = False
         db_table = 'auth_user'
         app_label = 'auth_user'
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey(
+        DjangoContentType, models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+        app_label = 'django_admin_log'
+
+
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=150)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+        app_label = 'auth_group'
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255)
+    content_type = models.ForeignKey(DjangoContentType, models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        app_label = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthGroupPermissions(models.Model):
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        app_label = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
 
 
 class AuthUserGroups(models.Model):
@@ -276,33 +316,6 @@ class Cards(models.Model):
         app_label = 'cards'
 
 
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.PositiveSmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey(
-        'DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
-        app_label = 'django_admin_log'
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'django_content_type'
-        app_label = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
-
-
 class DjangoMigrations(models.Model):
     app = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
@@ -377,19 +390,6 @@ class Rulings(models.Model):
         managed = False
         db_table = 'rulings'
         app_label = 'rulings'
-
-
-class SetTranslations(models.Model):
-    language = models.CharField(max_length=19, blank=True, null=True)
-    # Field name made lowercase.
-    setcode = models.ForeignKey(
-        'Sets', models.DO_NOTHING, db_column='setCode', to_field='code')
-    translation = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'set_translations'
-        app_label = 'set_translations'
 
 
 class Tokens(models.Model):
