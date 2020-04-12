@@ -74,7 +74,8 @@ TEMPLATES = [
 ]
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
-    "http://127.0.0.1:3001"
+    "http://127.0.0.1:3001",
+    "http://localhost:3000"
 ]
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -94,7 +95,7 @@ WSGI_APPLICATION = 'mtgblueprint.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mtgcards',
+        'NAME': 'scrysql',
         'USER': 'root',
         'PASSWORD': 'reverse',
         'HOST': '127.0.0.1',
