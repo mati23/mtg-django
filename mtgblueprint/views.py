@@ -36,7 +36,8 @@ class CardsListView(generics.ListAPIView):
     def get_queryset(self):
         name = self.kwargs['name']
         print(name)
-        cards = Cards.objects.filter(name__startswith=name)
+        cards = Cards.objects.filter(
+            name__startswith=name)
         return cards
 
 

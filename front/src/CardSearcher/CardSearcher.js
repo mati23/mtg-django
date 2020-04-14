@@ -34,6 +34,7 @@ function CardSearcher() {
         return history.push(('/card/' + value), { id: value, name: "test" })
     }
 
+
     return (
         <div className="card-searcher-container">
             <Autocomplete

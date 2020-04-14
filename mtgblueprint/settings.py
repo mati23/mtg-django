@@ -72,11 +72,7 @@ TEMPLATES = [
         },
     },
 ]
-CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:3001",
-    "http://localhost:3000"
-]
+CORS_ORIGIN_ALLOW_ALL = True
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
