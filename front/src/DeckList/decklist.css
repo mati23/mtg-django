@@ -1,0 +1,16 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding:0 10em;    
+}
+.card-container{
+    grid-column: 1fr;
+    margin: 1em;
+}
+.deck-thumbnail{
+    height: 10em!important;
+}
+.deck-container-title{
+    font-size: 5em;
+    grid-column: 1/-1;
+}

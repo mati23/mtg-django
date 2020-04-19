@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
-from mtgblueprint.views import CardsViewSet, CardsListView, CardDetailView
+from mtgblueprint.views import CardsViewSet, CardsListView, CardDetailView, DeckListView
 # Serializers define the API representation.
 
 
@@ -30,6 +30,7 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     url(r'^cards/(?P<name>.+)/$', CardsListView.as_view()),
     url(r'^card/(?P<pk>.+)/$', CardDetailView.as_view()),
+    url(r'^deck-list/$', DeckListView.as_view()),
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Authentication from './Authentication/Authentication';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
+
     <App />
+
   </React.StrictMode>,
   document.getElementById('root')
 );

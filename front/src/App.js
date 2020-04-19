@@ -5,21 +5,29 @@ import Authentication from './Authentication/Authentication';
 import './css/bulma.css'
 import CardSearcher from './CardSearcher/CardSearcher';
 import CardDetails from './CardDetails/CardDetails';
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useHistory
 } from "react-router-dom";
+import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core';
+import DeckList from './DeckList/DeckList';
+import Navbar from './Navbar/Navbar';
+
+
 
 function App() {
   return (
     <Router>
+      <Navbar></Navbar>
 
       <Route path="/" component={CardSearcher}></Route>
       <Route path="/auth" exact component={Authentication}></Route>
       <Route path="/card/:id" component={CardDetails}></Route>
-
+      <Route path="/deck-list" component={DeckList}></Route>
 
     </Router>
   );

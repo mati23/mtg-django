@@ -165,6 +165,22 @@ class Cards(models.Model):
         app_label = 'cards'
 
 
+class Decks(models.Model):
+    id = models.IntegerField(primary_key=True)
+    deck_description = models.CharField(max_length=255, blank=True, null=True)
+    user_id = models.IntegerField()
+    card_list = models.CharField(blank=True, null=True)
+    created_at = models.DateField()
+    updated_at = models.DateField()
+    title = models.TextField()
+    image = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'decks'
+        app_label = 'decks'
+
+
 class DjangoMigrations(models.Model):
     app = models.CharField(max_length=255)
     name = models.CharField(max_length=255)

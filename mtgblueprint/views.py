@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets, generics, filters
-from mtgblueprint.models import Cards
-from .serializers import CardSerializer, UserSerializer, CardDetailSerializer
+from mtgblueprint.models import Cards, Decks
+from .serializers import CardSerializer, UserSerializer, CardDetailSerializer, DeckListSerializer
 from django.views.generic import TemplateView
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -49,3 +49,12 @@ class CardDetailView(generics.ListAPIView):
         card = model_to_dict(Cards.objects.get(id=pk))
 
         return Response(card)
+
+
+class DeckListView(generics.ListAPIView):
+    serializer_class = DeckListSerializer
+    queryset = Decks.objects.all()
+
+    def get_queryset(self):
+        decks = Decks.objects.all()
+        return decks

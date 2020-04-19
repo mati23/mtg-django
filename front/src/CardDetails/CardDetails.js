@@ -17,7 +17,6 @@ function CardDetails() {
     const [cardImage, setCardImage] = useState("")
     const getObjectById = (id) => {
         let response = axios.get('http://127.0.0.1:8001/card/' + id + "/").then(result => {
-            console.log(result.data)
             setCardImage(result.data.image_normal)
         }).catch(error => { console.log(error) })
         return response
@@ -35,7 +34,6 @@ function CardDetails() {
     }
 
     const params = useParams()
-    console.log(params)
     let object = getObjectById(params.id)
     return (
         <div>
