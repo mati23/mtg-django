@@ -24,4 +24,10 @@ class CardDetailSerializer(serializers.ModelSerializer):
 class DeckListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Decks
+        fields = ['id', 'deck_description', 'title', 'image']
+
+
+class DeckDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Decks
         fields = ['id', 'deck_description', 'user_id', 'card_list', 'title']

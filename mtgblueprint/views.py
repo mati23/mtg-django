@@ -58,3 +58,13 @@ class DeckListView(generics.ListAPIView):
     def get_queryset(self):
         decks = Decks.objects.all()
         return decks
+
+
+class DeckDetailView(generics.ListAPIView):
+    serializer = DeckListSerializer
+    queryset = Decks.objects.all()
+
+    def get(self, request, pk):
+        deck = model_to_dict(Decks.objects.get(id=pk))
+
+        return Response(deck)

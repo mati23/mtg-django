@@ -1,0 +1,10 @@
+.deck-detail-container{
+    margin: 10em;
+}
+.deck-title{
+    font-size: 5em;
+}
+.deck-thumbnails{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}

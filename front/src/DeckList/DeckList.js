@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input, TextField, Card, CardContent, Typography } from '@material-ui/core';
+import { Button, Input, TextField, Card, CardContent, Typography, CardActionArea, CardActions } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios'
 import { useState, useEffect } from 'react';
@@ -30,27 +30,38 @@ let setDeckListInView = (deckList, title) => {
     )
 }
 
-
 function DeckList() {
+    let history = useHistory()
     let [decks, setDecks] = useState([])
     let [deckList, setDeckList] = useState([])
+    let openCardDetails = (id) => {
 
+        history.push('/deck/' + id + '/', { id: id })
+    }
     useEffect(() => {
         console.log("TESTE")
         axios.get('http://127.0.0.1:8001/deck-list/').then(
             (data) => {
                 data.data.map((item) => {
+                    let image = new Image()
+                    image.src = item.image
+                    console.log(item.image)
                     setDecks(decks => [...decks,
                     < Card className="card-container" >
                         < CardContent >
                             <Typography variant="h4" className="" color="textSecondary">
                                 {item.deck_description}
                             </Typography>
-                            <div className="deck-thumbnail">IMAGE</div>
+                            <div className="deck-thumbnail">
+                                <img src={image} />
+                            </div>
                             <Typography className="" color="textSecondary">
                                 Colors
-                                            </Typography>
+                            </Typography>
                         </CardContent >
+                        <CardActions>
+                            <Button className="open-deck-button" onClick={() => openCardDetails(item.id)}>Open Deck</Button>
+                        </CardActions>
                     </Card >])
                     console.log(decks)
                 })

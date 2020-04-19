@@ -14,3 +14,8 @@
     font-size: 5em;
     grid-column: 1/-1;
 }
+.open-deck-button{
+    margin: 1em;
+    background-color: #00D1B1!important;
+    color: white!important;
+}

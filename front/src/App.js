@@ -5,6 +5,7 @@ import Authentication from './Authentication/Authentication';
 import './css/bulma.css'
 import CardSearcher from './CardSearcher/CardSearcher';
 import CardDetails from './CardDetails/CardDetails';
+import DeckDetails from './DeckDetails/DeckDetails';
 
 import {
   BrowserRouter as Router,
@@ -28,6 +29,7 @@ function App() {
       <Route path="/auth" exact component={Authentication}></Route>
       <Route path="/card/:id" component={CardDetails}></Route>
       <Route path="/deck-list" component={DeckList}></Route>
+      <Route path="/deck/:id" component={DeckDetails}></Route>
 
     </Router>
   );
