@@ -10,24 +10,58 @@ import './deck-details.css'
 
 
 function DeckDetails() {
+
+
+
     let [deck, setDeck] = useState({})
+    let [cardList, setCardList] = useState("")
+
+    function getCardList(cardIdList) {
+        let cards_json = JSON.parse(cardIdList)
+        cards_json.map((item) => {
+            let response = axios.get("http://127.0.0.1:8001/card/" + item.id + "/").then((data) => {
+                console.log(data.data.image_normal)
+                setCardList(cardList => [...cardList,
+                <div className="card-thumbnail">
+                    <img src={data.data.image_png} alt="" />
+                </div>
+                ])
+            })
+        })
+        console.log(cards_json)
+    }
+
     let params = useParams()
     useEffect(() => {
         axios.get("http://127.0.0.1:8001/deck/" + params.id + "/").then(
             (data) => {
                 setDeck(data.data)
+                getCardList(data.data.card_list)
             }
         )
     }, [])
+
+    useEffect(() => {
+        deck.card_list == null || deck.card_list == undefined ? console.log("") : getCardList(deck.card_list)
+    }, [])
+
     let [loading, setLoading] = useState(true)
 
     return (
         <div className="deck-detail-container">
             <div className="deck-title">{deck.title}</div>
             <div>{deck.deck_description}</div>
+            <div className="deck-thumbnails">
+                {cardList}
+            </div>
+
+
+
             {loading && <CircularProgress />}
 
         </div>
     )
 }
 export default DeckDetails;
+
+

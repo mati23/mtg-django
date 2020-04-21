@@ -6,5 +6,21 @@
 }
 .deck-thumbnails{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.card-thumbnail{
+    -webkit-box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);
+    box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);    
+    background: transparent!important;
+    border-radius: 10px;
+    height: 20em;    
+    width: 14em;
+}
+.card-thumbnail img{
+    background: transparent!important;
+    height: 20em;    
 }
