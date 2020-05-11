@@ -3,6 +3,11 @@ from mtgblueprint.models import Cards, Decks
 from django.contrib.auth.models import User
 
 
+class DeckCrudSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Decks
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

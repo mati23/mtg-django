@@ -57,6 +57,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mtgblueprint.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

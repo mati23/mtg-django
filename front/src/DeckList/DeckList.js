@@ -74,6 +74,9 @@ function DeckList() {
     return (
         <div className="grid-container">
             <div className="deck-container-title">Decks</div>
+            <div className="deck-add-new">
+                <Button color="primary" variant="contained">Adicionar</Button>
+            </div>
             {decks}
         </div>
     );

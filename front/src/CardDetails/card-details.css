@@ -29,10 +29,18 @@
       display: flex;
       align-items: baseline;
       justify-content: center;
-      margin: 2em 0;
-      z-index: 1;
-      
+      margin: 2em 0 0 0;
+      z-index: 1;      
   }
   .action-button{
       margin: 10px!important;
+  }
+
+  .button-disabled{
+      background-color: #aaa!important;
+      color: #444!important;
+  }
+  .button-enabled{
+      background-color: #3F51B5!important;
+      color: white!important;
   }

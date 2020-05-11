@@ -2,13 +2,22 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets, generics, filters
 from mtgblueprint.models import Cards, Decks
-from .serializers import CardSerializer, UserSerializer, CardDetailSerializer, DeckListSerializer
+from .serializers import CardSerializer, UserSerializer, CardDetailSerializer, DeckListSerializer, DeckCrudSerializer
 from django.views.generic import TemplateView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import json
+from django.http import HttpResponse, HttpResponseRedirect
+
 
 from django.forms.models import model_to_dict
+
+
+def create(request):
+    print("TEST", request)
+    if(request.method == 'POST'):
+        print(json.loads(request.body.decode("UTF-8")))
+        return HttpResponseRedirect('/')
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -27,7 +36,7 @@ class CardsViewSet(viewsets.ModelViewSet):
 
 
 class CardsListView(generics.ListAPIView):
-    queryset = Cards.objects.all()
+    queryset = Cards.objects.all()[:5]
     serializer_class = CardSerializer
     filter_backends = [filters.SearchFilter]
     filter_fields = ['name']
@@ -37,13 +46,13 @@ class CardsListView(generics.ListAPIView):
         name = self.kwargs['name']
         print(name)
         cards = Cards.objects.filter(
-            name__startswith=name)
+            name__startswith=name)[:5]
         return cards
 
 
 class CardDetailView(generics.ListAPIView):
     serializer = CardDetailSerializer
-    queryset = Cards.objects.all()
+    queryset = Cards.objects.all()[:10]
 
     def get(self, request, pk):
         card = model_to_dict(Cards.objects.get(id=pk))

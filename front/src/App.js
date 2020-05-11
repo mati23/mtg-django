@@ -25,7 +25,6 @@ function App() {
     <Router>
       <Navbar></Navbar>
 
-      <Route path="/" component={CardSearcher}></Route>
       <Route path="/auth" exact component={Authentication}></Route>
       <Route path="/card/:id" component={CardDetails}></Route>
       <Route path="/deck-list" component={DeckList}></Route>

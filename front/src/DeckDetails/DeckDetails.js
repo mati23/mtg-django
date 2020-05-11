@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSpring, animated } from 'react-spring'
 import './deck-details.css'
+import CardSearcher from '../CardSearcher/CardSearcher';
 
 
 
@@ -49,6 +50,7 @@ function DeckDetails() {
 
     return (
         <div className="deck-detail-container">
+            <CardSearcher></CardSearcher>
             <div className="deck-title">{deck.title}</div>
             <div>{deck.deck_description}</div>
             <div className="deck-thumbnails">

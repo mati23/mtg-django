@@ -2,6 +2,8 @@ from django.conf.urls import url, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from mtgblueprint.views import CardsViewSet, CardsListView, CardDetailView, DeckListView, DeckDetailView
+import mtgblueprint.views as views
+from django.views.decorators.csrf import csrf_exempt
 # Serializers define the API representation.
 
 
@@ -28,6 +30,7 @@ router.register(r'users', UserViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    url(r'^deck/create', csrf_exempt(views.create)),
     url(r'^cards/(?P<name>.+)/$', CardsListView.as_view()),
     url(r'^card/(?P<pk>.+)/$', CardDetailView.as_view()),
     url(r'^deck/(?P<pk>.+)/$', DeckDetailView.as_view()),

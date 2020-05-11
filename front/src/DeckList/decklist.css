@@ -19,3 +19,7 @@
     background-color: #00D1B1!important;
     color: white!important;
 }
+.deck-add-new{
+    grid-column: 1/-1;
+    display: flex;
+}

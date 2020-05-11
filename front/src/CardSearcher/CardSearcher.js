@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './card_searcher.css';
 import { Button, Input, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
@@ -12,10 +12,16 @@ import {
     Redirect,
     useHistory
 } from "react-router-dom";
+import CardDetails from '../CardDetails/CardDetails';
 
 function CardSearcher() {
     const [cards, setCards] = useState([])
     const [cardName, setCardNames] = useState('')
+    const [cardViewerComponent, setCardViewerComponent] = useState()
+    const [selectedCard, setSelectedCard] = useState({
+        cardId: '',
+        visibility: false
+    })
     let history = useHistory()
     function setCardName(e) {
         setCardNames(e.target.value)
@@ -30,9 +36,19 @@ function CardSearcher() {
         console.log('true')
     }
     const getOptionSelectedFromMenu = (event, value) => {
-        console.log(value);
-        return history.push(('/card/' + value), { id: value, name: "test" })
+        setSelectedCard(value, true);
+        setCardViewerComponent(<CardDetails selectedCardId={value} newCardVisibility={"block"}></CardDetails>)
+        //setSelectedCardId(value)
+
+        //return history.push(('/card/' + value), { id: value, name: "test" })
     }
+    const togglePopUp = useCallback(
+        event => {
+            event.preventDefault();
+            setSelectedCard("teste", false)
+        },
+        [selectedCard.cardId, selectedCard.visibility]
+    );
 
 
     return (
@@ -47,6 +63,9 @@ function CardSearcher() {
                 loading={true}
                 onChange={(event, value) => { getOptionSelectedFromMenu(event, value.id) }}
             />
+
+            {cardViewerComponent}
+
         </div>
     );
 }
