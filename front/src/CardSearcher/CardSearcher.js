@@ -14,7 +14,7 @@ import {
 } from "react-router-dom";
 import CardDetails from '../CardDetails/CardDetails';
 
-function CardSearcher() {
+function CardSearcher(deckId) {
     const [cards, setCards] = useState([])
     const [cardName, setCardNames] = useState('')
     const [cardViewerComponent, setCardViewerComponent] = useState()
@@ -37,7 +37,7 @@ function CardSearcher() {
     }
     const getOptionSelectedFromMenu = (event, value) => {
         setSelectedCard(value, true);
-        setCardViewerComponent(<CardDetails selectedCardId={value} newCardVisibility={"block"}></CardDetails>)
+        setCardViewerComponent(<CardDetails deckId={deckId} selectedCardId={value} newCardVisibility={"block"}></CardDetails>)
         //setSelectedCardId(value)
 
         //return history.push(('/card/' + value), { id: value, name: "test" })

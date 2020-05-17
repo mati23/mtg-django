@@ -35,17 +35,14 @@ function DeckList() {
     let [decks, setDecks] = useState([])
     let [deckList, setDeckList] = useState([])
     let openCardDetails = (id) => {
-
         history.push('/deck/' + id + '/', { id: id })
     }
     useEffect(() => {
-        console.log("TESTE")
         axios.get('http://127.0.0.1:8001/deck-list/').then(
             (data) => {
                 data.data.map((item) => {
                     let image = new Image()
                     image.src = item.image
-                    console.log(item.image)
                     setDecks(decks => [...decks,
                     < Card className="card-container" >
                         < CardContent >
@@ -63,7 +60,7 @@ function DeckList() {
                             <Button className="open-deck-button" onClick={() => openCardDetails(item.id)}>Open Deck</Button>
                         </CardActions>
                     </Card >])
-                    console.log(decks)
+
                 })
 
             }

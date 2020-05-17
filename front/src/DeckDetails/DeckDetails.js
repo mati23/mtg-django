@@ -6,12 +6,12 @@ import { useParams } from 'react-router-dom';
 import { useSpring, animated } from 'react-spring'
 import './deck-details.css'
 import CardSearcher from '../CardSearcher/CardSearcher';
+import Context, { ContextProvider } from '../Context/Context';
 
 
 
 
 function DeckDetails() {
-
 
 
     let [deck, setDeck] = useState({})
@@ -21,7 +21,7 @@ function DeckDetails() {
         let cards_json = JSON.parse(cardIdList)
         cards_json.map((item) => {
             let response = axios.get("http://127.0.0.1:8001/card/" + item.id + "/").then((data) => {
-                console.log(data.data.image_normal)
+
                 setCardList(cardList => [...cardList,
                 <div className="card-thumbnail">
                     <img src={data.data.image_png} alt="" />
@@ -29,10 +29,10 @@ function DeckDetails() {
                 ])
             })
         })
-        console.log(cards_json)
     }
 
     let params = useParams()
+
     useEffect(() => {
         axios.get("http://127.0.0.1:8001/deck/" + params.id + "/").then(
             (data) => {
@@ -50,7 +50,7 @@ function DeckDetails() {
 
     return (
         <div className="deck-detail-container">
-            <CardSearcher></CardSearcher>
+            <CardSearcher deckId={params.id}></CardSearcher>
             <div className="deck-title">{deck.title}</div>
             <div>{deck.deck_description}</div>
             <div className="deck-thumbnails">
