@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import json
+import re
 from django.http import HttpResponse, HttpResponseRedirect
 
 
@@ -16,7 +17,12 @@ from django.forms.models import model_to_dict
 def create(request):
     print("TEST", request)
     if(request.method == 'POST'):
-        print(json.loads(request.body.decode("UTF-8")))
+        cardObject = json.loads(request.body.decode("UTF-8"))
+        deckId = cardObject["deckId"]
+        card_id = cardObject["id"]
+        print(card_id)
+        deck = Decks.objects.get(id=deckId)
+        print(deck.check_quantity_before_insert(card_id, 1))
         return HttpResponseRedirect('/')
 
 

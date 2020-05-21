@@ -6,6 +6,8 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+import json
+import re
 
 
 class AuthGroup(models.Model):
@@ -174,6 +176,18 @@ class Decks(models.Model):
     updated_at = models.DateField()
     title = models.TextField()
     image = models.TextField()
+
+    def getCardList(self):
+        return self.card_list
+
+    def check_quantity_before_insert(self, id, quantity):
+        card_list_object = json.loads(self.card_list)
+        for index in range(0, len(card_list_object)):
+            result = re.search(id, card_list_object[index]['id'])
+            print(result)
+
+        for index in range(0, len(card_list_object)):
+            pass
 
     class Meta:
         managed = False

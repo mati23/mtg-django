@@ -3,7 +3,7 @@ import './card-details.css';
 import { Button, Input, TextField, Chip } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSpring, animated } from 'react-spring'
 import Context, { ContextConsumer } from '../Context/Context';
@@ -11,15 +11,28 @@ import Context, { ContextConsumer } from '../Context/Context';
 const calc = (x, y) => [-(y - window.innerHeight / 2) / 40, (x - window.innerWidth / 2) / 40, 1.3]
 const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
 
-const CardDetails = ({ deckId, selectedCardId, newCardVisibility }) => {
+const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething }) => {
+
     const [cardVisibility, setCardVisibility] = useState({
         visibility: '',
     })
     const [cardObject, setCardObject] = useState({
         id: '',
-        quantity: '',
+        quantity: 0,
         deckId: ''
     })
+
+    const lol = useEffect(() => {
+        setCardQuantity(0)
+        setCardObject({
+            id: selectedCardId,
+            quantity: cardQuantity,
+            deckId: ''
+        })
+        console.log('olocobixo')
+    }, [selectedCardId])
+
+
     const [cardQuantity, setCardQuantity] = useState(0)
     const [props, setProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 550, friction: 40 } }))
     const [cardImage, setCardImage] = useState("")
@@ -69,7 +82,7 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility }) => {
     }
 
     return (
-        <div style={{ display: newCardVisibility }}>
+        <div style={{ display: newCardVisibility }} >
             <div className="card-details">
                 <div className="card-thumbnail-container">
                     <animated.div className="card"

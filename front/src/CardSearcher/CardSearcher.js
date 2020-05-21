@@ -35,9 +35,13 @@ function CardSearcher(deckId) {
     const optionSelect = () => {
         console.log('true')
     }
+    const printlol = (event) => {
+        return event
+    }
     const getOptionSelectedFromMenu = (event, value) => {
+        console.log(value)
         setSelectedCard(value, true);
-        setCardViewerComponent(<CardDetails deckId={deckId} selectedCardId={value} newCardVisibility={"block"}></CardDetails>)
+        return setCardViewerComponent(<CardDetails deckId={deckId} selectedCardId={value} newCardVisibility={"block"} printSomething={printlol}></CardDetails>)
         //setSelectedCardId(value)
 
         //return history.push(('/card/' + value), { id: value, name: "test" })
