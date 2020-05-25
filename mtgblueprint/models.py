@@ -184,10 +184,25 @@ class Decks(models.Model):
         card_list_object = json.loads(self.card_list)
         for index in range(0, len(card_list_object)):
             result = re.search(id, card_list_object[index]['id'])
-            print(result)
+            if result is not None and (card_list_object[index]['quantity']+quantity <= 4):
+                print("foi", result)
+                card_list_object[index]['quantity'] = card_list_object[index]['quantity'] + quantity
+                new_card_list = json.dumps(card_list_object)
+                self.card_list = new_card_list
+                self.save()
+                return "Success"
+            elif result is not None and (card_list_object[index]['quantity']+quantity > 4):
+                print("quantidade excedida")
+                return "Quantity Exceded"
 
-        for index in range(0, len(card_list_object)):
-            pass
+        card_list_object.append({
+            'id': id,
+            'quantity': quantity
+        })
+        self.card_list = json.dumps(card_list_object)
+        self.save()
+
+        return "Success"
 
     class Meta:
         managed = False

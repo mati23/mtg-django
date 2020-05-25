@@ -12,15 +12,21 @@
 }
 
 .card-thumbnail{
+    
+    background: transparent!important;
+    border-radius: 10px;
+    height: 23em;    
+    width: 14em;
+}
+.card-thumbnail-quantity{
+    text-align: center;
+    font-size: 2em;
+    font-weight: 900;
+}
+.card-thumbnail img{
     -webkit-box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);
     box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);    
-    background: transparent!important;
-    border-radius: 10px;
-    height: 20em;    
-    width: 14em;
-}
-.card-thumbnail img{
     background: transparent!important;
     height: 20em;    
 }

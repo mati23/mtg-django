@@ -17,13 +17,14 @@ function DeckDetails() {
     let [deck, setDeck] = useState({})
     let [cardList, setCardList] = useState("")
 
+
     function getCardList(cardIdList) {
         let cards_json = JSON.parse(cardIdList)
         cards_json.map((item) => {
             let response = axios.get("http://127.0.0.1:8001/card/" + item.id + "/").then((data) => {
-
                 setCardList(cardList => [...cardList,
                 <div className="card-thumbnail">
+                    <div className="card-thumbnail-quantity">{item.quantity}X </div>
                     <img src={data.data.image_png} alt="" />
                 </div>
                 ])
@@ -36,6 +37,7 @@ function DeckDetails() {
     useEffect(() => {
         axios.get("http://127.0.0.1:8001/deck/" + params.id + "/").then(
             (data) => {
+                console.log(data.data.card_list)
                 setDeck(data.data)
                 getCardList(data.data.card_list)
             }

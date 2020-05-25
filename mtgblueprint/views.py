@@ -22,8 +22,9 @@ def create(request):
         card_id = cardObject["id"]
         print(card_id)
         deck = Decks.objects.get(id=deckId)
-        print(deck.check_quantity_before_insert(card_id, 1))
-        return HttpResponseRedirect('/')
+        response_message = deck.check_quantity_before_insert(
+            card_id, cardObject["quantity"])
+        return HttpResponseRedirect('/', response_message)
 
 
 class UserViewSet(viewsets.ModelViewSet):
