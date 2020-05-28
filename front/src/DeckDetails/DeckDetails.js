@@ -58,11 +58,6 @@ function DeckDetails() {
             <div className="deck-thumbnails">
                 {cardList}
             </div>
-
-
-
-            {loading && <CircularProgress />}
-
         </div>
     )
 }

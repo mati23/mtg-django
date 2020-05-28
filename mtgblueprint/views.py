@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 import json
 import re
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 
 from django.forms.models import model_to_dict
@@ -24,7 +24,7 @@ def create(request):
         deck = Decks.objects.get(id=deckId)
         response_message = deck.check_quantity_before_insert(
             card_id, cardObject["quantity"])
-        return HttpResponseRedirect('/', response_message)
+        return JsonResponse({"response": response_message})
 
 
 class UserViewSet(viewsets.ModelViewSet):

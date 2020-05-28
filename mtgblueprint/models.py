@@ -8,6 +8,7 @@
 from django.db import models
 import json
 import re
+import mtgblueprint.constants as c
 
 
 class AuthGroup(models.Model):
@@ -190,10 +191,10 @@ class Decks(models.Model):
                 new_card_list = json.dumps(card_list_object)
                 self.card_list = new_card_list
                 self.save()
-                return "Success"
+                return "SUCCESS"
             elif result is not None and (card_list_object[index]['quantity']+quantity > 4):
                 print("quantidade excedida")
-                return "Quantity Exceded"
+                return c.EXCCEDED_CARD_QUANTITY_EXCEPTION
 
         card_list_object.append({
             'id': id,
@@ -202,7 +203,7 @@ class Decks(models.Model):
         self.card_list = json.dumps(card_list_object)
         self.save()
 
-        return "Success"
+        return "SUCCESS"
 
     class Meta:
         managed = False

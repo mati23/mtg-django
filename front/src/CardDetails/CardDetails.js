@@ -1,6 +1,6 @@
 import React from 'react';
 import './card-details.css';
-import { Button, Input, TextField, Chip } from '@material-ui/core';
+import { Button, Input, TextField, Chip, Dialog } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios'
 import { useState, useEffect } from 'react';
@@ -33,6 +33,13 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
     }, [selectedCardId])
 
 
+    const [dialog, setDialog] = useState({
+        visibility: false,
+        message: ""
+    })
+
+
+
     const [cardQuantity, setCardQuantity] = useState(0)
     const [props, setProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 550, friction: 40 } }))
     const [cardImage, setCardImage] = useState("")
@@ -44,6 +51,23 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
             return response
         }
     }
+
+    const openDialog = (new_message) => {
+        setDialog({
+            visibility: true,
+            message: new_message
+        })
+    }
+    const closeDialog = () => {
+
+        setDialog({
+            visibility: false
+        })
+        if (dialog.message == "SUCCESS") {
+            window.location.reload()
+        }
+    }
+
     const increaseCounter = () => {
         if (cardQuantity <= 3) {
             setCardQuantity(cardQuantity + 1)
@@ -77,7 +101,7 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
             "id": value.id,
             "quantity": value.quantity,
             "deckId": value.deckId
-        })
+        }).then(result => { openDialog(result.data.response) })
     }
 
     return (
@@ -102,8 +126,21 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
                         disabled={cardQuantity > 0 ? false : true}
                         onClick={(event, value) => saveCardIntoDeck(event, cardObject)}>SAVE</Button>
                 </div>
-
+                <i class="fa fa-bars"></i>
             </div>
+
+
+            <Dialog onClose={closeDialog} aria-labelledby="customized-dialog-title" open={dialog.visibility}>
+                <div className="dialog-container">
+                    <div className="icon-container">
+                        <i className={dialog.message == "SUCCESS" ? "fas fa-check dialog-icon green" : "fas fa-times dialog-icon red"}></i>
+                    </div>
+                    <div className="dialog-message">
+                        {dialog.message}
+                    </div>
+                </div>
+            </Dialog>
+
 
         </div>
     );

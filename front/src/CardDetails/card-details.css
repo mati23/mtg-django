@@ -18,7 +18,7 @@
     transition: box-shadow 0.5s;
     will-change: transform;
     border: 15px solid rgba(255, 255, 255, 0.1);
-    z-index: 9999!important;
+    z-index: 999!important;
   }
   
   .card:hover {
@@ -43,4 +43,28 @@
   .button-enabled{
       background-color: #3F51B5!important;
       color: white!important;
+  }
+  .dialog-container{
+      display: flex;
+      flex-direction: column;
+      padding: 2em 2em!important;
+      min-width: 600px;
+  }
+  .dialog-icon{
+      text-align: center;
+      font-size: 5em;      
+  }
+  .icon-container{
+      display: flex;
+      justify-content: center;
+  }
+  .red{
+      color: rgba(138,23,35,1)!important;
+  }
+  .green{
+      color:  rgba(23,158,123,1)!important;
+  }
+  .dialog-message{
+      text-align: center;
+      font-size: 2rem;
   }
