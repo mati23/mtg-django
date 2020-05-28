@@ -11,7 +11,7 @@ import Context, { ContextConsumer } from '../Context/Context';
 const calc = (x, y) => [-(y - window.innerHeight / 2) / 40, (x - window.innerWidth / 2) / 40, 1.3]
 const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
 
-const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething }) => {
+const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, printSomething }) => {
 
     const [cardVisibility, setCardVisibility] = useState({
         visibility: '',
@@ -38,8 +38,6 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
         message: ""
     })
 
-
-
     const [cardQuantity, setCardQuantity] = useState(0)
     const [props, setProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 550, friction: 40 } }))
     const [cardImage, setCardImage] = useState("")
@@ -59,12 +57,14 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
         })
     }
     const closeDialog = () => {
-
         setDialog({
             visibility: false
         })
         if (dialog.message == "SUCCESS") {
-            window.location.reload()
+
+            setCardVisibility({ visibility: "none" })
+            console.log("setted invisible")
+            updateList()
         }
     }
 
@@ -74,7 +74,7 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
             setCardObject({
                 id: selectedCardId,
                 quantity: cardQuantity + 1,
-                deckId: deckId.deckId
+                deckId: deckId
             })
         }
     }
@@ -84,7 +84,7 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
             setCardObject({
                 id: selectedCardId,
                 quantity: cardQuantity - 1,
-                deckId: deckId.deckId
+                deckId: deckId
             })
         }
     }
@@ -97,6 +97,7 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
         let object = getObjectById(selectedCardId)
     }
     const saveCardIntoDeck = (event, value) => {
+        console.log('valor: ', value)
         let response = axios.post("http://127.0.0.1:8001/deck/create", {
             "id": value.id,
             "quantity": value.quantity,
@@ -105,7 +106,7 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
     }
 
     return (
-        <div style={{ display: newCardVisibility }} >
+        <div style={{ display: cardVisibility.visibility }} >
             <div className="card-details">
                 <div className="card-thumbnail-container">
                     <animated.div className="card"
@@ -140,8 +141,6 @@ const CardDetails = ({ deckId, selectedCardId, newCardVisibility, printSomething
                     </div>
                 </div>
             </Dialog>
-
-
         </div>
     );
 }

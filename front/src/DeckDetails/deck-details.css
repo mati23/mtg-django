@@ -19,9 +19,17 @@
     width: 14em;
 }
 .card-thumbnail-quantity{
+    display: flex;
     text-align: center;
+    justify-content: center;
     font-size: 2em;
     font-weight: 900;
+}
+.card-quantity-button .MuiButton-root{    
+    min-width: 20px;
+}
+.card-quantity-button{
+    margin: 0 1em!important;
 }
 .card-thumbnail img{
     -webkit-box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);
