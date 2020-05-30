@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "pythonPath": "/usr/bin/python3",
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",

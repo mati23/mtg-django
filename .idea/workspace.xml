@@ -2,35 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5396efea-ea06-45c4-b8a3-02858c9824fc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/card.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mtgblueprint.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mtgblueprint.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front" beforeDir="false" afterPath="$PROJECT_DIR$/front" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mtgblueprint/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mtgblueprint/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" module-name="mtgblueprint" is-module-sdk="true">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+    <option name="myUseModuleSdk" value="true" />
+    <option name="myModuleName" value="mtgblueprint" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1ZpMOTXdW6t92CFfouypzGt8jDE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/manage.py" />
+    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="mtgblueprint" sdk-home="/usr/bin/python3">
+        <option name="mySdkHome" value="/usr/bin/python3" />
+        <option name="myModuleName" value="mtgblueprint" />
+      </console-settings>
+    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -45,6 +60,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -54,19 +70,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="runserver 127.0.0.1:8001" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="mtgblueprint" />
-      <option name="INTERPRETER_OPTIONS" value="runserver 127.0.0.1:8001" />
+      <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="/usr/bin/python3.7" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -86,42 +103,82 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585531549950</updated>
+      <workItem from="1590842771622" duration="4971000" />
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="418" y="189" width="1084" height="718" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585532713968">
+    <state x="418" y="189" width="1084" height="718" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590847339818">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state x="418" y="189" width="1084" height="718" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1585532713968" />
-    <state width="1897" height="264" key="GridCell.Tab.0.bottom" timestamp="1585535838770">
+    <state x="418" y="189" width="1084" height="718" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1590847339818" />
+    <state x="901" y="290" width="309" height="488" key="EnvironmentVariablesDialog" timestamp="1590847394689">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1897" height="264" key="GridCell.Tab.0.bottom/0.27.1920.1010@0.27.1920.1010" timestamp="1585535838770" />
-    <state width="1897" height="264" key="GridCell.Tab.0.center" timestamp="1585535838769">
+    <state x="901" y="290" width="309" height="488" key="EnvironmentVariablesDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1590847394689" />
+    <state x="844" y="277" width="424" height="513" key="FileChooserDialogImpl" timestamp="1590846059801">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1897" height="264" key="GridCell.Tab.0.center/0.27.1920.1010@0.27.1920.1010" timestamp="1585535838769" />
-    <state width="1897" height="264" key="GridCell.Tab.0.left" timestamp="1585535838763">
+    <state x="844" y="277" width="424" height="513" key="FileChooserDialogImpl/0.27.1920.1010@0.27.1920.1010" timestamp="1590846059801" />
+    <state width="1874" height="264" key="GridCell.Tab.0.bottom" timestamp="1590847742909">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1897" height="264" key="GridCell.Tab.0.left/0.27.1920.1010@0.27.1920.1010" timestamp="1585535838763" />
-    <state width="1897" height="264" key="GridCell.Tab.0.right" timestamp="1585535838769">
+    <state width="1874" height="264" key="GridCell.Tab.0.bottom/0.27.1920.1010@0.27.1920.1010" timestamp="1590847742909" />
+    <state width="1874" height="264" key="GridCell.Tab.0.center" timestamp="1590847742898">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1897" height="264" key="GridCell.Tab.0.right/0.27.1920.1010@0.27.1920.1010" timestamp="1585535838769" />
-    <state x="449" y="187" key="SettingsEditor" timestamp="1585789898724">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1874" height="264" key="GridCell.Tab.0.center/0.27.1920.1010@0.27.1920.1010" timestamp="1590847742898" />
+    <state width="1874" height="264" key="GridCell.Tab.0.left" timestamp="1590847742898">
+      <screen x="0" y="27" width="1920" height="1010" />
     </state>
+    <state width="1874" height="264" key="GridCell.Tab.0.left/0.27.1920.1010@0.27.1920.1010" timestamp="1590847742898" />
+    <state width="1874" height="264" key="GridCell.Tab.0.right" timestamp="1590847742908">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="1874" height="264" key="GridCell.Tab.0.right/0.27.1920.1010@0.27.1920.1010" timestamp="1590847742908" />
+    <state width="1874" height="326" key="GridCell.Tab.1.bottom" timestamp="1590847742893">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="1874" height="326" key="GridCell.Tab.1.bottom/0.27.1920.1010@0.27.1920.1010" timestamp="1590847742893" />
+    <state width="1874" height="326" key="GridCell.Tab.1.center" timestamp="1590847742893">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="1874" height="326" key="GridCell.Tab.1.center/0.27.1920.1010@0.27.1920.1010" timestamp="1590847742893" />
+    <state width="1874" height="326" key="GridCell.Tab.1.left" timestamp="1590847742893">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="1874" height="326" key="GridCell.Tab.1.left/0.27.1920.1010@0.27.1920.1010" timestamp="1590847742893" />
+    <state width="1874" height="326" key="GridCell.Tab.1.right" timestamp="1590847742893">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="1874" height="326" key="GridCell.Tab.1.right/0.27.1920.1010@0.27.1920.1010" timestamp="1590847742893" />
+    <state x="330" y="94" key="SettingsEditor" timestamp="1590847507830">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state x="330" y="94" key="SettingsEditor/0.27.1920.1010@0.27.1920.1010" timestamp="1590847507830" />
     <state x="449" y="187" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1585789898724" />
-    <state x="616" y="373" key="com.intellij.ide.util.TipDialog" timestamp="1585789888969">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state x="616" y="359" key="com.intellij.ide.util.TipDialog" timestamp="1590841771104">
+      <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state x="616" y="359" key="com.intellij.ide.util.TipDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1585531616773" />
+    <state x="616" y="359" key="com.intellij.ide.util.TipDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1590841771104" />
     <state x="616" y="373" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1585789888969" />
+    <state x="731" y="446" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590846438447">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state x="731" y="446" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1920.1010@0.27.1920.1010" timestamp="1590846438447" />
     <state x="841" y="327" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey" timestamp="1585532697035">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
     <state x="841" y="327" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey/0.27.1920.1010@0.27.1920.1010" timestamp="1585532697035" />
+    <state x="650" y="139" width="620" height="783" key="find.popup" timestamp="1590843690631">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state x="650" y="139" width="620" height="783" key="find.popup/0.27.1920.1010@0.27.1920.1010" timestamp="1590843690631" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/mtgblueprint$runserver_127_0_0_1_8001.coverage" NAME="manage Coverage Results" MODIFIED="1590847533869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

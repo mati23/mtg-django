@@ -4,7 +4,7 @@ import sys
 
 home = os.path.dirname(sys.argv[0])
 sys.path.append(os.path.join(home, "mtgblueprint/model"))
-
+import django
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mtgblueprint.settings")
