@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { Button, Input, TextField, Chip, CircularProgress } from '@material-ui/core';
 import './card-thumbnail.css'
 import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useMemo } from 'react';
 export const CardThumbNail = ({ item, data, updateCardList }) => {
     const [quantityButtonsVisibility, setQuantityButtonsVisibility] = useState(false)
-    const [defaultQuantity, setDefaultQuantity] = useState(0)
+    const [defaultQuantity, setDefaultQuantity] = useState(item.quantity)
+    const [updatableCard, setUpdatableCard] = useState()
+    const [changedState, setChangedState] = useState()
 
     useEffect(() => {
-        setDefaultQuantity(item.quantity)
-    }, [])
-
+        updateCardList(item.id, defaultQuantity)
+    }, [defaultQuantity])
     const showButtons = () => {
         setQuantityButtonsVisibility(true)
     }
@@ -17,18 +20,16 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
         setQuantityButtonsVisibility(false)
     }
 
-    const increaseCounter = (deckId) => {
-        updateCardList()
+    const increaseCounter = (cardId) => {
         if (defaultQuantity <= 3) {
             setDefaultQuantity(defaultQuantity + 1)
 
         }
     }
     const decreaseCounter = (cardId) => {
-        updateCardList()
         if (defaultQuantity >= 1) {
             setDefaultQuantity(defaultQuantity - 1)
-
+            setChangedState(!changedState)
         }
     }
     return (
@@ -39,9 +40,9 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
                         -
                 </Button>
                 </div>
-                <div style={{ color: item.quantity == defaultQuantity ? "#333" : "#206CD9" }} >{defaultQuantity}X </div>
+                <div className={item.quantity == defaultQuantity ? "quantity-not-edited" : "quantity-edited"} >{defaultQuantity}X </div>
                 <div style={{ visibility: quantityButtonsVisibility == true ? "visible" : "hidden" }}>
-                    <Button className="green-background card-quantity-button" size="small" variant="contained" onClick={increaseCounter}>
+                    <Button className="green-background card-quantity-button" size="small" variant="contained" onClick={() => increaseCounter(item.id)}>
                         +
                 </Button>
                 </div>

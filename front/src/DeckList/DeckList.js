@@ -35,7 +35,6 @@ function DeckList() {
     let [decks, setDecks] = useState([])
     let [deckList, setDeckList] = useState([])
     let openCardDetails = (id) => {
-        console.log(id)
         history.push('/deck/' + id + '/', { id: id })
     }
     useEffect(() => {

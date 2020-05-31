@@ -29,7 +29,6 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
             quantity: cardQuantity,
             deckId: ''
         })
-        console.log('olocobixo')
     }, [selectedCardId])
 
 
@@ -63,7 +62,6 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
         if (dialog.message == "SUCCESS") {
 
             setCardVisibility({ visibility: "none" })
-            console.log("setted invisible")
             updateList()
         }
     }

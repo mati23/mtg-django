@@ -38,3 +38,15 @@
     background: transparent!important;
     height: 20em;    
 }
+.description-container{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    height: 3em;
+}
+.description-container-right{
+    display: flex;
+    justify-content: flex-end;
+}
+.description-text{
+    font-style: italic;
+}

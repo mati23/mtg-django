@@ -40,7 +40,6 @@ const CardSearcher = ({ deckId, updateList }) => {
         return event
     }
     const getOptionSelectedFromMenu = (event, value) => {
-        console.log("deckId:", deckId)
         setSelectedCard(value, true);
         return setCardViewerComponent(<CardDetails updateList={() => updateList()} deckId={deckId} selectedCardId={value} newCardVisibility={"block"} printSomething={printlol}></CardDetails>)
         //setSelectedCardId(value)
