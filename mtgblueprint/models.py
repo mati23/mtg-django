@@ -205,6 +205,15 @@ class Decks(models.Model):
 
         return "SUCCESS"
 
+    def save_new_card_list(self, new_card_list):
+        try:
+            self.card_list = new_card_list
+            self.save()
+            return c.SUCCESS
+        except NameError:
+            return (c.EXCEPTION_HAPPENED + NameError)
+
+
     class Meta:
         managed = False
         db_table = 'decks'

@@ -15,7 +15,6 @@ from django.forms.models import model_to_dict
 
 
 def create(request):
-    print("TEST", request)
     if(request.method == 'POST'):
         cardObject = json.loads(request.body.decode("UTF-8"))
         deckId = cardObject["deckId"]
@@ -24,6 +23,14 @@ def create(request):
         deck = Decks.objects.get(id=deckId)
         response_message = deck.check_quantity_before_insert(
             card_id, cardObject["quantity"])
+        return JsonResponse({"response": response_message})
+
+def save_changes(request):
+    print("Test")
+    if(request.method == 'POST'):
+        deckObject = json.loads(request.body.decode("UTF-8"))
+        deck = Decks.objects.get(id=deckObject["deckId"])
+        response_message = deck.save_new_card_list(deckObject["newCardList"])
         return JsonResponse({"response": response_message})
 
 

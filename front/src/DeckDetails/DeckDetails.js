@@ -18,6 +18,7 @@ function DeckDetails() {
     const [cardString, setCardString] = useState([])
     const [updatableCardList, setUpdatableCardList] = useState("")
     const [updatableCardHasChanges, setUpdatableCardHasChanges] = useState(false)
+    const [newCardArray, setNewCardArray] = useState([])
 
     let cardArray = []
 
@@ -42,6 +43,7 @@ function DeckDetails() {
                 if (index.id === cardId) {
                     index.quatity = quantity
                     checkForUpdatedValues()
+                    setNewCardArray(cardArray)
                 }
             })
         }
@@ -101,7 +103,10 @@ function DeckDetails() {
     )
 
     const saveChanges = () => {
-        let response = axios.post("http://127.0.0.1:8001/deck/saveChanges/").then((result) => {
+        let response = axios.post("http://127.0.0.1:8001/deck/save_changes/", {
+            newCardCist: newCardArray,
+            deckId: params.id
+        }).then((result) => {
             console.log(result.data)
         })
     }
