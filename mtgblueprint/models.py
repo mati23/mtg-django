@@ -182,35 +182,42 @@ class Decks(models.Model):
         return self.card_list
 
     def check_quantity_before_insert(self, id, quantity):
-        card_list_object = json.loads(self.card_list)
-        for index in range(0, len(card_list_object)):
-            result = re.search(id, card_list_object[index]['id'])
-            if result is not None and (card_list_object[index]['quantity']+quantity <= 4):
-                print("foi", result)
-                card_list_object[index]['quantity'] = card_list_object[index]['quantity'] + quantity
-                new_card_list = json.dumps(card_list_object)
-                self.card_list = new_card_list
-                self.save()
-                return "SUCCESS"
-            elif result is not None and (card_list_object[index]['quantity']+quantity > 4):
-                print("quantidade excedida")
-                return c.EXCCEDED_CARD_QUANTITY_EXCEPTION
+        if self.card_list != None:
+            card_list_object = json.loads(self.card_list)
+        else:
+            card_list_object = []
+        try:
+            for index in range(0, len(card_list_object)):
+                result = re.search(id, card_list_object[index]['id'])
+                if result is not None and (card_list_object[index]['quantity']+quantity <= 4):
+                    print("foi", result)
+                    card_list_object[index]['quantity'] = card_list_object[index]['quantity'] + quantity
+                    new_card_list = json.dumps(card_list_object)
+                    self.card_list = new_card_list
+                    self.save()
+                    return "SUCCESS"
+                elif result is not None and (card_list_object[index]['quantity']+quantity > 4):
+                    print("quantidade excedida")
+                    return c.EXCCEDED_CARD_QUANTITY_EXCEPTION
 
-        card_list_object.append({
-            'id': id,
-            'quantity': quantity
-        })
-        self.card_list = json.dumps(card_list_object)
-        self.save()
-
-        return "SUCCESS"
+            card_list_object.append({
+                'id': id,
+                'quantity': quantity
+            })
+            self.card_list = json.dumps(card_list_object)
+            self.save()
+            return "SUCCESS"
+        except NameError:
+            return (c.EXCEPTION_HAPPENED + NameError)
 
     def save_new_card_list(self, new_card_list):
         try:
-            self.card_list = new_card_list
+            print(type(self.card_list), type(new_card_list), type(json.dumps(new_card_list)))
+            self.card_list = json.dumps(new_card_list)
+            print(self.card_list)
             self.save()
             return c.SUCCESS
-        except NameError:
+        except:
             return (c.EXCEPTION_HAPPENED + NameError)
 
 

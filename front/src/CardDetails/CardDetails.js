@@ -11,7 +11,7 @@ import Context, { ContextConsumer } from '../Context/Context';
 const calc = (x, y) => [-(y - window.innerHeight / 2) / 40, (x - window.innerWidth / 2) / 40, 1.3]
 const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
 
-const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, printSomething }) => {
+const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, printSomething, openDialog }) => {
 
     const [cardVisibility, setCardVisibility] = useState({
         visibility: '',
@@ -32,10 +32,7 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
     }, [selectedCardId])
 
 
-    const [dialog, setDialog] = useState({
-        visibility: false,
-        message: ""
-    })
+
 
     const [cardQuantity, setCardQuantity] = useState(0)
     const [props, setProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 550, friction: 40 } }))
@@ -49,22 +46,7 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
         }
     }
 
-    const openDialog = (new_message) => {
-        setDialog({
-            visibility: true,
-            message: new_message
-        })
-    }
-    const closeDialog = () => {
-        setDialog({
-            visibility: false
-        })
-        if (dialog.message == "SUCCESS") {
 
-            setCardVisibility({ visibility: "none" })
-            updateList()
-        }
-    }
 
     const increaseCounter = () => {
         if (cardQuantity <= 3) {
@@ -100,7 +82,10 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
             "id": value.id,
             "quantity": value.quantity,
             "deckId": value.deckId
-        }).then(result => { openDialog(result.data.response) })
+        }).then(result => {
+            console.log("enviou opendialog", result)
+            openDialog(result.data.response)
+        })
     }
 
     return (
@@ -127,18 +112,6 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
                 </div>
                 <i class="fa fa-bars"></i>
             </div>
-
-
-            <Dialog onClose={closeDialog} aria-labelledby="customized-dialog-title" open={dialog.visibility}>
-                <div className="dialog-container">
-                    <div className="icon-container">
-                        <i className={dialog.message == "SUCCESS" ? "fas fa-check dialog-icon green" : "fas fa-times dialog-icon red"}></i>
-                    </div>
-                    <div className="dialog-message">
-                        {dialog.message}
-                    </div>
-                </div>
-            </Dialog>
         </div>
     );
 }

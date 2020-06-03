@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input, TextField, Chip, CircularProgress, Fade } from '@material-ui/core';
+import { Button, Input, TextField, Chip, CircularProgress, Fade, Dialog } from '@material-ui/core';
 import axios from 'axios'
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
@@ -22,9 +22,6 @@ function DeckDetails() {
 
     let cardArray = []
 
-    useEffect(() => {
-        console.log("first")
-    }, [updatableCardList])
     const [deckListHasChanged, setDeckListHasChanged] = useState(true)
 
 
@@ -41,9 +38,10 @@ function DeckDetails() {
         if (cardId !== "" && cardArray.map((item) => { return item.id === cardId ? true : false })) {
             cardArray.map((index) => {
                 if (index.id === cardId) {
-                    index.quatity = quantity
+                    index.new_quantity = quantity
                     checkForUpdatedValues()
                     setNewCardArray(cardArray)
+                    //console.log(newCardArray)
                 }
             })
         }
@@ -59,15 +57,38 @@ function DeckDetails() {
 
     function getCardList(cardIdList) {
         let cards_json = JSON.parse(cardIdList)
-        cards_json.map((item) => { cardArray.push(item) })
-        setCardString(cardIdList)
-        cards_json.map((item) => {
-            let response = axios.get("http://127.0.0.1:8001/card/" + item.id + "/").then((data) => {
-                setCardList(cardList => [...cardList,
-                <CardThumbNail key={item.id} item={item} data={data} updateCardList={updateCardList}></CardThumbNail>
-                ])
+        if (cards_json) {
+            cards_json.map((item) => { cardArray.push(item) })
+            setCardString(cardIdList)
+
+            cards_json.map((item) => {
+                let response = axios.get("http://127.0.0.1:8001/card/" + item.id + "/").then((data) => {
+                    setCardList(cardList => [...cardList,
+                    <CardThumbNail key={item.id} item={item} data={data} updateCardList={updateCardList}></CardThumbNail>
+                    ])
+                })
             })
+        }
+    }
+
+    const [dialog, setDialog] = useState({
+        visibility: false,
+        message: ""
+    })
+    const openDialog = (new_message) => {
+        console.log("abrindo dialog", new_message)
+        setDialog({
+            visibility: true,
+            message: new_message
         })
+    }
+    const closeDialog = () => {
+        setDialog({
+            visibility: false
+        })
+        if (dialog.message == "SUCCESS") {
+            updateList()
+        }
     }
 
     let params = useParams()
@@ -93,29 +114,40 @@ function DeckDetails() {
 
     let [loading, setLoading] = useState(true)
 
-    const updateList = useCallback(
+    const updateList =
         () => {
             setCardList("")
             updateDeckInfo()
             getCardList(deck.card_list)
-        },
-        [deckListHasChanged],
-    )
+        }
 
     const saveChanges = () => {
+        console.log(newCardArray)
+        let cardListPost = []
+        newCardArray.map((item) => {
+            cardListPost.push({
+                id: item.id,
+                quantity: item.new_quantity
+            })
+        })
+        console.log(cardListPost)
         let response = axios.post("http://127.0.0.1:8001/deck/save_changes/", {
-            newCardCist: newCardArray,
+            newCardList: cardListPost,
             deckId: params.id
         }).then((result) => {
             console.log(result.data)
+            openDialog(result.data.response)
         })
     }
 
 
 
+
+
+
     return (
         <div className="deck-detail-container">
-            <CardSearcher deckId={params.id} updateList={() => updateList()}></CardSearcher>
+            <CardSearcher deckId={params.id} openDialog={(new_message) => openDialog(new_message)}></CardSearcher>
             <div className="deck-title">{deck.title}</div>
             <div className="description-container">
                 <div className="description-text">"{deck.deck_description}"</div>
@@ -124,6 +156,16 @@ function DeckDetails() {
             <div className="deck-thumbnails">
                 {cardList}
             </div>
+            <Dialog onClose={closeDialog} aria-labelledby="customized-dialog-title" open={dialog.visibility}>
+                <div className="dialog-container">
+                    <div className="icon-container">
+                        <i className={dialog.message == "SUCCESS" ? "fas fa-check dialog-icon green" : "fas fa-times dialog-icon red"}></i>
+                    </div>
+                    <div className="dialog-message">
+                        {dialog.message}
+                    </div>
+                </div>
+            </Dialog>
         </div >
     )
 }

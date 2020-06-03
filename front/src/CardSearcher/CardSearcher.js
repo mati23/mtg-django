@@ -13,8 +13,9 @@ import {
     useHistory
 } from "react-router-dom";
 import CardDetails from '../CardDetails/CardDetails';
+import { useEffect } from 'react';
 
-const CardSearcher = ({ deckId, updateList }) => {
+const CardSearcher = ({ deckId, updateList, openDialog }) => {
 
     const [cards, setCards] = useState([])
     const [cardName, setCardNames] = useState('')
@@ -41,7 +42,7 @@ const CardSearcher = ({ deckId, updateList }) => {
     }
     const getOptionSelectedFromMenu = (event, value) => {
         setSelectedCard(value, true);
-        return setCardViewerComponent(<CardDetails updateList={() => updateList()} deckId={deckId} selectedCardId={value} newCardVisibility={"block"} printSomething={printlol}></CardDetails>)
+        return setCardViewerComponent(<CardDetails deckId={deckId} selectedCardId={value} newCardVisibility={"block"} printSomething={printlol} openDialog={(new_message) => openDialog(new_message)}></CardDetails>)
         //setSelectedCardId(value)
 
         //return history.push(('/card/' + value), { id: value, name: "test" })
