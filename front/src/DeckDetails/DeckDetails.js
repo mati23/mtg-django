@@ -24,7 +24,9 @@ function DeckDetails() {
 
     const [deckListHasChanged, setDeckListHasChanged] = useState(true)
 
-
+    useEffect(() => {
+        getDeckManaCount()
+    }, [])
     function checkForUpdatedValues() {
         let list = document.getElementsByClassName("quantity-edited")
         if (list.length > 0) {
@@ -34,6 +36,13 @@ function DeckDetails() {
         }
     }
 
+    function getDeckManaCount() {
+        let response = axios.post("http://127.0.0.1:8001/deck/deck_mana/", { deckId: params.id })
+            .then(result => {
+                let json_result = JSON.parse(result.data.response)
+                console.log(json_result)
+            })
+    }
     const updateCardList = useCallback((cardId, quantity) => {
         if (cardId !== "" && cardArray.map((item) => { return item.id === cardId ? true : false })) {
             cardArray.map((index) => {

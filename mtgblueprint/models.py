@@ -178,7 +178,6 @@ class Decks(models.Model):
     updated_at = models.DateField()
     title = models.TextField()
     image = models.TextField()
-    mana_list = list()
 
     def getCardList(self):
         return self.card_list
@@ -232,9 +231,9 @@ class Decks(models.Model):
             for matchNum, match in enumerate(matches):
                 for groupNum in range(0,len(match.groups())):
                     print(match.group(1))
-                    self.mana_list = cf.search_dict_in_array(self.mana_list, match.group(1))
+                    dictionary_list = cf.search_dict_in_array(dictionary_list, match.group(1))
 
-        return json.dumps(self.mana_list)
+        return json.dumps(dictionary_list)
 
     class Meta:
         managed = False
