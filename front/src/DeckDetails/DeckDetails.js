@@ -55,6 +55,10 @@ function DeckDetails() {
         console.log(updatableCardList)
     }, [updatableCardList])
 
+    useEffect(() => {
+        console.log(deck)
+    }, [setDeck])
+
     function getCardList(cardIdList) {
         let cards_json = JSON.parse(cardIdList)
         if (cards_json) {
@@ -116,9 +120,9 @@ function DeckDetails() {
 
     const updateList =
         () => {
+            setDeck({})
             setCardList("")
             updateDeckInfo()
-            getCardList(deck.card_list)
         }
 
     const saveChanges = () => {

@@ -9,6 +9,7 @@ from django.db import models
 import json
 import re
 import mtgblueprint.constants as c
+import mtgblueprint.customfunctions as cf
 
 
 class AuthGroup(models.Model):
@@ -177,6 +178,7 @@ class Decks(models.Model):
     updated_at = models.DateField()
     title = models.TextField()
     image = models.TextField()
+    mana_list = list()
 
     def getCardList(self):
         return self.card_list
@@ -190,7 +192,6 @@ class Decks(models.Model):
             for index in range(0, len(card_list_object)):
                 result = re.search(id, card_list_object[index]['id'])
                 if result is not None and (card_list_object[index]['quantity']+quantity <= 4):
-                    print("foi", result)
                     card_list_object[index]['quantity'] = card_list_object[index]['quantity'] + quantity
                     new_card_list = json.dumps(card_list_object)
                     self.card_list = new_card_list
@@ -220,6 +221,20 @@ class Decks(models.Model):
         except:
             return (c.EXCEPTION_HAPPENED + NameError)
 
+    def count_mana_costs(self):
+        card_array = json.loads(self.card_list)
+        dictionary_list = []
+        pattern = r'\{(.*?)\}'
+        for index in card_array:
+            card = Cards.objects.get(id=index["id"])
+            matches = re.finditer(pattern,card.mana_cost)
+
+            for matchNum, match in enumerate(matches):
+                for groupNum in range(0,len(match.groups())):
+                    print(match.group(1))
+                    self.mana_list = cf.search_dict_in_array(self.mana_list, match.group(1))
+
+        return json.dumps(self.mana_list)
 
     class Meta:
         managed = False

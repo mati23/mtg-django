@@ -4,15 +4,23 @@ import './card-thumbnail.css'
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useMemo } from 'react';
+import axios from 'axios'
 export const CardThumbNail = ({ item, data, updateCardList }) => {
     const [quantityButtonsVisibility, setQuantityButtonsVisibility] = useState(false)
     const [defaultQuantity, setDefaultQuantity] = useState(item.quantity)
     const [updatableCard, setUpdatableCard] = useState()
     const [changedState, setChangedState] = useState()
+    const [cardDetail, setCardDetail] = useState([])
 
+
+    useEffect(() => {
+        console.log(item.id)
+        getObjectById(item.id)
+    }, [])
     useEffect(() => {
         updateCardList(item.id, defaultQuantity)
     }, [defaultQuantity])
+
     const showButtons = () => {
         setQuantityButtonsVisibility(true)
     }
@@ -30,6 +38,15 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
         if (defaultQuantity >= 1) {
             setDefaultQuantity(defaultQuantity - 1)
             setChangedState(!changedState)
+        }
+    }
+    function getObjectById(id) {
+        if (id !== "" && id !== null && id !== undefined) {
+            let response = axios.get('http://127.0.0.1:8001/card/' + id + "/").then(result => {
+                console.log(result.data)
+                setCardDetail(result.data)
+            }).catch(error => { console.log(error) })
+            return response
         }
     }
     return (

@@ -33,6 +33,14 @@ def save_changes(request):
         response_message = deck.save_new_card_list(deckObject["newCardList"])
         return JsonResponse({"response": response_message})
 
+def count_deck_mana(request):
+    if(request.method=='POST'):
+        print(json.loads(request.body.decode("UTF-8")))
+        deckObject=json.loads(request.body.decode("UTF-8"))
+        deck = Decks.objects.get(id=deckObject["deckId"])
+        deck_mana = deck.count_mana_costs()
+        return JsonResponse({"response":deck_mana})
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -45,7 +53,7 @@ class CardsViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         name = self.kwargs['name']
-        cards = Cards.objects.filter(name__startswith='El')
+        cards = Cards.objects.filter(name__startswith=name)
         return cards
 
 
@@ -70,7 +78,6 @@ class CardDetailView(generics.ListAPIView):
 
     def get(self, request, pk):
         card = model_to_dict(Cards.objects.get(id=pk))
-
         return Response(card)
 
 
