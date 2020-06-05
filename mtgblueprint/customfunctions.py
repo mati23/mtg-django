@@ -1,5 +1,9 @@
-def search_dict_in_array(array, value):
+import json
+import re
+import mtgblueprint.constants as c
+from mtgblueprint.model.Cards import Cards
 
+def search_dict_in_array(array, value):
     if array == None or  len(array) <= 0:
         if value.isnumeric():
             array.append({"color": "number", "quantity": value})
@@ -20,3 +24,17 @@ def search_dict_in_array(array, value):
 
         array.append({"color": value, "quantity": 1})
         return array
+
+def calculate_mana_counter(card_array):
+    dictionary_list = []
+    pattern = r'\{(.*?)\}'
+    for index in card_array:
+        card = Cards.objects.get(id=index["id"])
+        matches = re.finditer(pattern, card.mana_cost)
+
+        for matchNum, match in enumerate(matches):
+            for groupNum in range(0, len(match.groups())):
+                for quantity in range(0, int(index["quantity"])):
+                    dictionary_list = search_dict_in_array(dictionary_list, match.group(1))
+
+    return dictionary_list

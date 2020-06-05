@@ -1,5 +1,6 @@
 from rest_framework import routers, serializers, viewsets
-from mtgblueprint.models import Cards, Decks
+from mtgblueprint.models import Decks
+from mtgblueprint.model.Cards import Cards
 from django.contrib.auth.models import User
 
 

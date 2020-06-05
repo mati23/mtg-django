@@ -111,62 +111,6 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
-class Cards(models.Model):
-    id = models.CharField(primary_key=True, max_length=255)
-    oracle_id = models.CharField(max_length=255, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    lang = models.CharField(max_length=255, blank=True, null=True)
-    released_at = models.CharField(max_length=255, blank=True, null=True)
-    uri = models.CharField(max_length=255, blank=True, null=True)
-    scryfall_uri = models.CharField(max_length=255, blank=True, null=True)
-    layout = models.CharField(max_length=255, blank=True, null=True)
-    highres_image = models.IntegerField(blank=True, null=True)
-    image_small = models.CharField(max_length=255, blank=True, null=True)
-    image_normal = models.CharField(max_length=255, blank=True, null=True)
-    image_large = models.CharField(max_length=255, blank=True, null=True)
-    image_png = models.CharField(max_length=255, blank=True, null=True)
-    image_art_crop = models.CharField(max_length=255, blank=True, null=True)
-    image_border_crop = models.CharField(max_length=255, blank=True, null=True)
-    mana_cost = models.CharField(max_length=45, blank=True, null=True)
-    cmc = models.CharField(max_length=45, blank=True, null=True)
-    type_line = models.CharField(max_length=45, blank=True, null=True)
-    oracle_text = models.TextField(blank=True, null=True)
-    colors = models.CharField(max_length=45, blank=True, null=True)
-    color_identity = models.CharField(max_length=45, blank=True, null=True)
-    reserved = models.IntegerField(blank=True, null=True)
-    foil = models.IntegerField(blank=True, null=True)
-    oversized = models.IntegerField(blank=True, null=True)
-    promo = models.IntegerField(blank=True, null=True)
-    reprint = models.IntegerField(blank=True, null=True)
-    variation = models.IntegerField(blank=True, null=True)
-    set = models.CharField(max_length=45, blank=True, null=True)
-    set_name = models.CharField(max_length=45, blank=True, null=True)
-    set_type = models.CharField(max_length=45, blank=True, null=True)
-    set_uri = models.CharField(max_length=255, blank=True, null=True)
-    set_search_uri = models.CharField(max_length=255, blank=True, null=True)
-    scryfall_set_uri = models.CharField(max_length=255, blank=True, null=True)
-    rulings_uri = models.CharField(max_length=255, blank=True, null=True)
-    collector_number = models.CharField(max_length=10, blank=True, null=True)
-    digital = models.IntegerField(blank=True, null=True)
-    rarity = models.CharField(max_length=45, blank=True, null=True)
-    card_back_id = models.CharField(max_length=45, blank=True, null=True)
-    artist = models.CharField(max_length=45, blank=True, null=True)
-    artist_id = models.CharField(max_length=45, blank=True, null=True)
-    illustration_id = models.CharField(max_length=45, blank=True, null=True)
-    border_color = models.CharField(max_length=45, blank=True, null=True)
-    frame = models.CharField(max_length=45, blank=True, null=True)
-    full_art = models.IntegerField(blank=True, null=True)
-    textless = models.IntegerField(blank=True, null=True)
-    booster = models.IntegerField(blank=True, null=True)
-    story_spotlight = models.IntegerField(blank=True, null=True)
-    edhrec_rank = models.CharField(max_length=45, blank=True, null=True)
-    prints_search_uri = models.CharField(max_length=255, blank=True, null=True)
-    artist_ids = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cards'
-        app_label = 'cards'
 
 
 class Decks(models.Model):
@@ -222,23 +166,34 @@ class Decks(models.Model):
 
     def count_mana_costs(self):
         card_array = json.loads(self.card_list)
-        dictionary_list = []
+        dictionary_list = cf.calculate_mana_counter(card_array)
+        return json.dumps(dictionary_list)
+
+    def add_mana_counter_to_global_counter(self,global_deck_counter):
+        card_array = json.loads(self.card_list)
         pattern = r'\{(.*?)\}'
         for index in card_array:
             card = Cards.objects.get(id=index["id"])
-            matches = re.finditer(pattern,card.mana_cost)
+            matches = re.finditer(pattern, card.mana_cost)
 
             for matchNum, match in enumerate(matches):
                 for groupNum in range(0, len(match.groups())):
                     for quantity in range(0, int(index["quantity"])):
-                        dictionary_list = cf.search_dict_in_array(dictionary_list, match.group(1))
-
-        return json.dumps(dictionary_list)
-
+                        global_deck_counter = cf.search_dict_in_array(global_deck_counter, match.group(1))
     class Meta:
         managed = False
         db_table = 'decks'
         app_label = 'decks'
+
+class GeneralInformation(models.Model):
+    id = models.IntegerField(null=False)
+    information_description = models.CharField(max_length=255)
+    information_value = models.CharField()
+
+    class Meta:
+        managed = False
+        db_table='general_information'
+        app_label='general_information'
 
 
 class DjangoMigrations(models.Model):

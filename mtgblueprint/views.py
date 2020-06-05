@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets, generics, filters
-from mtgblueprint.models import Cards, Decks
+from mtgblueprint.models import Decks
+from mtgblueprint.model.Cards import  Cards
 from .serializers import CardSerializer, UserSerializer, CardDetailSerializer, DeckListSerializer, DeckCrudSerializer
 from django.views.generic import TemplateView
 from rest_framework.views import APIView
@@ -40,6 +41,17 @@ def count_deck_mana(request):
         deck = Decks.objects.get(id=deckObject["deckId"])
         deck_mana = deck.count_mana_costs()
         return JsonResponse({"response":deck_mana})
+
+def calculate_all_mana_decks(request):
+    if (request.method == 'GET'):
+        decks_mana_list = []
+        deck_list = []
+        decks = Decks.objects.all()
+        for index in decks:
+            deck_list.append(index.card_list)
+            #decks_mana_list.append(index.count_mana_costs())
+
+    return JsonResponse({"response": decks_mana_list})
 
 
 class UserViewSet(viewsets.ModelViewSet):
