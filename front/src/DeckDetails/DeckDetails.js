@@ -8,6 +8,7 @@ import './deck-details.css'
 import CardSearcher from '../CardSearcher/CardSearcher';
 import Context, { ContextProvider } from '../Context/Context';
 import { CardThumbNail } from '../CardThumbnail/CardThumbnail';
+import ReactEcharts from "echarts-for-react";
 
 
 
@@ -19,14 +20,55 @@ function DeckDetails() {
     const [updatableCardList, setUpdatableCardList] = useState("")
     const [updatableCardHasChanges, setUpdatableCardHasChanges] = useState(false)
     const [newCardArray, setNewCardArray] = useState([])
+    const [manaCount, setManaCount] = useState([])
+    const [graphColors, setGraphColors] = useState([])
 
     let cardArray = []
 
     const [deckListHasChanged, setDeckListHasChanged] = useState(true)
 
+    function attributeStringToColor(array) {
+        let color = []
+        array.map(item => {
+            switch (item.name) {
+                case 'R':
+                    color.push("#F06B51")
+                    break
+                case 'G':
+                    color.push("#24645A")
+                    break
+                case 'U':
+                    color.push("#1D97C1")
+                    break
+                case 'B':
+                    color.push("#293138")
+                    break
+                case 'W':
+                    color.push("#FBE4C3")
+                    break
+                case 'number':
+                    color.push("#000")
+                    break
+                case 'S':
+                    color.push("#5C929B")
+                    break
+                case 'C':
+                    color.push("#7B7B7B")
+                    break
+
+            }
+        })
+        return color
+    }
     useEffect(() => {
         getDeckManaCount()
+
     }, [])
+
+    useEffect(() => {
+        console.log("manaCount:", manaCount)
+        setGraphColors(attributeStringToColor(manaCount))
+    }, [manaCount])
     function checkForUpdatedValues() {
         let list = document.getElementsByClassName("quantity-edited")
         if (list.length > 0) {
@@ -39,8 +81,16 @@ function DeckDetails() {
     function getDeckManaCount() {
         let response = axios.post("http://127.0.0.1:8001/deck/deck_mana/", { deckId: params.id })
             .then(result => {
-                let json_result = JSON.parse(result.data.response)
-                console.log(json_result)
+                let json_result = []
+                let newManaArray = []
+                json_result = JSON.parse(result.data.response)
+                json_result.map(item => {
+                    if (item.color !== "number") {
+                        newManaArray.push({ value: item.quantity, name: item.color })
+                    }
+                })
+                setManaCount(newManaArray)
+                console.log('result', json_result)
             })
     }
     const updateCardList = useCallback((cardId, quantity) => {
@@ -61,12 +111,9 @@ function DeckDetails() {
     }, [updatableCardHasChanges])
 
     useEffect(() => {
-        console.log(updatableCardList)
+
     }, [updatableCardList])
 
-    useEffect(() => {
-        console.log(deck)
-    }, [setDeck])
 
     function getCardList(cardIdList) {
         let cards_json = JSON.parse(cardIdList)
@@ -89,7 +136,6 @@ function DeckDetails() {
         message: ""
     })
     const openDialog = (new_message) => {
-        console.log("abrindo dialog", new_message)
         setDialog({
             visibility: true,
             message: new_message
@@ -135,7 +181,6 @@ function DeckDetails() {
         }
 
     const saveChanges = () => {
-        console.log(newCardArray)
         let cardListPost = []
         newCardArray.map((item) => {
             cardListPost.push({
@@ -143,12 +188,10 @@ function DeckDetails() {
                 quantity: item.new_quantity
             })
         })
-        console.log(cardListPost)
         let response = axios.post("http://127.0.0.1:8001/deck/save_changes/", {
             newCardList: cardListPost,
             deckId: params.id
         }).then((result) => {
-            console.log(result.data)
             openDialog(result.data.response)
         })
     }
@@ -160,14 +203,52 @@ function DeckDetails() {
 
     return (
         <div className="deck-detail-container">
-            <CardSearcher deckId={params.id} openDialog={(new_message) => openDialog(new_message)}></CardSearcher>
-            <div className="deck-title">{deck.title}</div>
-            <div className="description-container">
-                <div className="description-text">"{deck.deck_description}"</div>
-                <div className="description-container-right">{updatableCardHasChanges == false ? "" : <Fade in={updatableCardHasChanges}><Button color="primary" variant="contained" onClick={saveChanges}>SAVE CHANGES</Button></Fade>}</div>
+            <div className="centralized-container">
+                <CardSearcher deckId={params.id} openDialog={(new_message) => openDialog(new_message)}></CardSearcher>
+                <div className="deck-title">{deck.title}</div>
+                <div className="description-container">
+                    <div className="description-text">"{deck.deck_description}"</div>
+                    <div className="description-container-right">{updatableCardHasChanges == false ? "" : <Fade in={updatableCardHasChanges}><Button color="primary" variant="contained" onClick={saveChanges}>SAVE CHANGES</Button></Fade>}</div>
+                </div>
+                <div className="deck-thumbnails">
+                    {cardList}
+                </div>
             </div>
-            <div className="deck-thumbnails">
-                {cardList}
+            <div className="chart-container">
+                <ReactEcharts
+                    option={{
+                        title: {
+                            text: 'Overall Statistics',
+                            textStyle: {
+                                color: "#fff",
+                                fontWeight: 'normal',
+                                fontSize: 56,
+                                align: 'center'
+                            },
+                            left: 200
+
+                        },
+                        tooltip: {},
+                        legend: {
+                            data: ['Sales']
+                        },
+                        series: [{
+                            name: 'Sales',
+                            type: 'pie',
+                            radius: '70%',
+                            center: ['50%', '50%'],
+                            color: graphColors,
+                            data: manaCount,
+                            roseType: 'radius',
+                            animationType: 'scale',
+                            animationEasing: 'elasticOut',
+                            animationDelay: function (idx) {
+                                return Math.random() * 200;
+                            }
+                        }]
+                    }}
+                    style={{ height: '500px', width: '100%' }}
+                ></ReactEcharts>
             </div>
             <Dialog onClose={closeDialog} aria-labelledby="customized-dialog-title" open={dialog.visibility}>
                 <div className="dialog-container">

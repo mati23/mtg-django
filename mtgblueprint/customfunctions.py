@@ -18,5 +18,5 @@ def search_dict_in_array(array, value):
                 index["quantity"] = index["quantity"] + 1
                 return array
 
-            array.append({"color": value, "quantity": 1})
-            return array
+        array.append({"color": value, "quantity": 1})
+        return array

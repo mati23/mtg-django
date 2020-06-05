@@ -229,9 +229,9 @@ class Decks(models.Model):
             matches = re.finditer(pattern,card.mana_cost)
 
             for matchNum, match in enumerate(matches):
-                for groupNum in range(0,len(match.groups())):
-                    print(match.group(1))
-                    dictionary_list = cf.search_dict_in_array(dictionary_list, match.group(1))
+                for groupNum in range(0, len(match.groups())):
+                    for quantity in range(0, int(index["quantity"])):
+                        dictionary_list = cf.search_dict_in_array(dictionary_list, match.group(1))
 
         return json.dumps(dictionary_list)
 
