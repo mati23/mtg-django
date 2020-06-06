@@ -169,17 +169,7 @@ class Decks(models.Model):
         dictionary_list = cf.calculate_mana_counter(card_array)
         return json.dumps(dictionary_list)
 
-    def add_mana_counter_to_global_counter(self,global_deck_counter):
-        card_array = json.loads(self.card_list)
-        pattern = r'\{(.*?)\}'
-        for index in card_array:
-            card = Cards.objects.get(id=index["id"])
-            matches = re.finditer(pattern, card.mana_cost)
 
-            for matchNum, match in enumerate(matches):
-                for groupNum in range(0, len(match.groups())):
-                    for quantity in range(0, int(index["quantity"])):
-                        global_deck_counter = cf.search_dict_in_array(global_deck_counter, match.group(1))
     class Meta:
         managed = False
         db_table = 'decks'

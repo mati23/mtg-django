@@ -10,6 +10,7 @@ from rest_framework.response import Response
 import json
 import re
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+import mtgblueprint.customfunctions as cf
 
 
 from django.forms.models import model_to_dict
@@ -44,14 +45,14 @@ def count_deck_mana(request):
 
 def calculate_all_mana_decks(request):
     if (request.method == 'GET'):
-        decks_mana_list = []
         deck_list = []
         decks = Decks.objects.all()
         for index in decks:
-            deck_list.append(index.card_list)
-            #decks_mana_list.append(index.count_mana_costs())
+            for object in json.loads(index.card_list):
+                deck_list.append(object)
+        global_deck_counter = cf.add_mana_counter_to_global_counter(deck_list)
 
-    return JsonResponse({"response": decks_mana_list})
+    return JsonResponse({"response": global_deck_counter})
 
 
 class UserViewSet(viewsets.ModelViewSet):
