@@ -1,0 +1,8 @@
+@font-face{
+    font-family: 'Quicksand';
+    src: url('./Quicksand-VariableFont_wght.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Roboto';
+    src: url('./Roboto-Thin.ttf') format('truetype');
+}
