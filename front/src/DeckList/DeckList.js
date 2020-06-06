@@ -40,6 +40,7 @@ function DeckList() {
     useEffect(() => {
         axios.get('http://127.0.0.1:8001/deck-list/').then(
             (data) => {
+                console.log(data)
                 data.data.map((item) => {
                     console.log(item)
                     setDecks(decks => [...decks,

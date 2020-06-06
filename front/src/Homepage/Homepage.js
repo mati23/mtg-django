@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -10,25 +11,47 @@ import axios from 'axios'
 import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core';
 import ReactEcharts from "echarts-for-react";
 
+var HashMap = require('hashmap')
+var map = new HashMap()
+
 function Homepage() {
     const [manaCount, setManaCount] = useState([])
-    const [graphColors, setGraphColors] = useState([])
+    const [smallestNumber, setSmallestNumber] = useState(0)
+
     const allManaCost = () => {
         const response = axios.get('http://127.0.0.1:8001/')
             .then(result => {
                 console.log(result)
                 let json_result = []
                 let newManaArray = []
+                map.multi(
+                    "R", 0,
+                    "G", 0,
+                    "U", 0,
+                    "B", 0,
+                    "W", 0,
+                    "C", 0,
+                )
                 json_result = result.data.response
                 json_result.map(item => {
                     if (item.color !== "number") {
-                        newManaArray.push(item.quantity)
+                        map.set(item.color, item.quantity)
+                        if (item.quantity > smallestNumber) {
+                            setSmallestNumber(item.quantity)
+                        }
                     }
                 })
+                map.forEach((value, key) => {
+                    newManaArray.push(value)
+                    console.log(key, value, newManaArray)
+
+                })
                 setManaCount(newManaArray)
-                console.log('result', json_result)
             })
     }
+    useEffect(() => {
+        console.log(manaCount)
+    }, [manaCount])
     useEffect(() => {
         allManaCost()
     }, [])
@@ -71,7 +94,7 @@ function Homepage() {
                 <ReactEcharts
                     option={{
                         title: {
-                            text: 'Overall Statistics',
+                            text: 'Global Mana',
                             textStyle: {
                                 color: "#fff",
                                 fontWeight: 'normal',
@@ -96,19 +119,19 @@ function Homepage() {
                                 }
                             },
                             indicator: [
-                                { name: 'Red', max: 6500 },
-                                { name: 'Green', max: 16000 },
-                                { name: 'Blue', max: 30000 },
-                                { name: 'Black', max: 38000 },
-                                { name: 'White', max: 52000 },
-                                { name: 'Non-Color', max: 25000 }
+                                { name: 'Red', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: 'red' },
+                                { name: 'Green', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: 'green' },
+                                { name: 'Blue', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: 'blue' },
+                                { name: 'Black', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: 'black' },
+                                { name: 'White', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: 'white' },
+                                { name: 'Non-Color', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: 'grey' }
                             ],
                             shape: 'circle'
                         },
                         series: [{
                             name: 'Sales',
                             type: 'radar',
-                            data: [{ value: manaCount, name: "dsa" }],
+                            data: [{ value: manaCount, name: "Legend" }],
 
                         }]
                     }}
