@@ -32,6 +32,7 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     url(r'^deck/create', csrf_exempt(views.create)),
     url( '^$', csrf_exempt(views.calculate_all_mana_decks)),
+    url( '^auth/set_auth_image/$', csrf_exempt(views.set_auth_image)),
     url(r'^deck/save_changes', csrf_exempt(views.save_changes)),
     url(r'^deck/deck_mana', csrf_exempt(views.count_deck_mana)),
     url(r'^cards/(?P<name>.+)/$', CardsListView.as_view()),

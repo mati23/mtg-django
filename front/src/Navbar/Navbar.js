@@ -17,7 +17,7 @@ function Navbar() {
         <div>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu" href="/">
+                    <IconButton edge="start" color="inherit" aria-label="menu" href="/" style={{ fontFamily: 'Roboto-Regular' }}>
                         Mtg Blueprint
           </IconButton>
                     <Button style={{ color: "#fff" }} onClick={showDeckList}>Decks</Button>

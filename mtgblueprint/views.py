@@ -11,9 +11,12 @@ import json
 import re
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 import mtgblueprint.customfunctions as cf
-
-
+import os
+from random import choice
+import base64
+from PIL import Image
 from django.forms.models import model_to_dict
+import io
 
 
 def create(request):
@@ -53,6 +56,17 @@ def calculate_all_mana_decks(request):
         global_deck_counter = cf.add_mana_counter_to_global_counter(deck_list)
 
     return JsonResponse({"response": global_deck_counter})
+
+def set_auth_image(request):
+    if(request.method=='GET'):
+        path = '../mtgblueprint/front/src/assets/widescreen/'
+        image_list = os.listdir(path)
+        with open(path+choice(image_list),"rb") as image:
+            encoded_image = base64.b64encode(image.read())
+
+        print(encoded_image)
+    return JsonResponse({"response": str(encoded_image,"utf-8")})
+
 
 
 class UserViewSet(viewsets.ModelViewSet):

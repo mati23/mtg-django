@@ -49,6 +49,7 @@ django-rest-framework = "*"
 django-filters = "*"
 django-filter = "*"
 django-cors-headers = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
