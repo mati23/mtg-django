@@ -33,13 +33,6 @@ export default function Authentication() {
             password: registerForm[2].getElementsByTagName("input")[0].value,
             passwordConfirmation: registerForm[3].getElementsByTagName("input")[0].value
         }))
-
-
-
-        //if (errorMessage == "") {
-        //    let response = axios.post("http://127.0.0.1:8001/auth/register_user/", registrationForm)
-        //}
-
     }
 
     useEffect(() => {
@@ -48,6 +41,11 @@ export default function Authentication() {
 
     useEffect(() => {
         console.log(registrationForm)
+        if (registrationForm.username != "" && registrationForm.password != "" && registrationForm.passwordConfirmation != "" && registrationForm.email != "") {
+            let response = axios.post("http://127.0.0.1:8001/auth/register_user/", registrationForm).then(result => {
+                console.log(result)
+            })
+        }
     }, [registrationForm])
 
 
@@ -63,20 +61,22 @@ export default function Authentication() {
                 <div className="authentication-form-container">
                     <div className="login">
                         <div className="login-container">
-                            <TextField value={registrationForm.username} label="Username or Email" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <TextField label="Password" type="password" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <Button variant="contained" color="primary" className="thin">
+                            <h2 style={{ alignSelf: 'self-end', fontFamily: 'Roboto-Regular', fontSize: '3em' }}>Login</h2>
+                            <TextField value={registrationForm.username} label="Username or Email" variant="outlined" style={{ width: "100%" }} />
+                            <TextField label="Password" type="password" variant="outlined" style={{ width: "100%" }} />
+                            <Button variant="contained" color="primary" className="thin" style={{ gridRowStart: "6" }}>
                                 Olá Mundo
-                        </Button>
+                            </Button>
                         </div>
                     </div>
                     <div className="registration">
                         <div className="registration-container" >
-                            <TextField id="registration_username" className="registration_input" label="Username" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <TextField id="registration_email" className="registration_input" label="Email" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <TextField id="registration_password" className="registration_input" label="Password" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <TextField id="registration_confirm_password" className="registration_input" label="Confirm Password" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <Button variant="contained" color="primary" className="thin" onClick={register}>
+                            <h2 style={{ alignSelf: 'self-end', fontFamily: 'Roboto-Regular', fontSize: '3em' }}>Register</h2>
+                            <TextField id="registration_username" className="registration_input" label="Username" variant="outlined" style={{ width: "100%" }} />
+                            <TextField id="registration_email" className="registration_input" label="Email" variant="outlined" style={{ width: "100%" }} />
+                            <TextField id="registration_password" className="registration_input" label="Password" variant="outlined" style={{ width: "100%" }} />
+                            <TextField id="registration_confirm_password" className="registration_input" label="Confirm Password" variant="outlined" style={{ width: "100%" }} />
+                            <Button variant="contained" color="primary" className="thin" onClick={register} style={{ gridRowStart: "6" }}>
                                 Register
                             </Button>
 

@@ -17,11 +17,11 @@ body::-webkit-scrollbar {
 }
 .login{  
     grid-column-start: 2;
-    grid-column-end: 4;  
+    grid-column-end: 4;   
+    padding: 3em 1em;
     align-items: center;
     display: flex;
-    justify-content: center;    
-    padding: 10em 1em;
+    justify-content: center;
 }
 .login-container, .registration-container{
     backdrop-filter: blur(10px);
@@ -31,8 +31,8 @@ body::-webkit-scrollbar {
     background: rgba(255,255,255,0.6);
     z-index: 99990;
     align-items: center;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: repeat(6,1fr);    
     justify-content: center;    
     width: 100%;
     height: 100%;    
@@ -42,7 +42,7 @@ body::-webkit-scrollbar {
 .registration{         
     grid-column-start: 4;
     grid-column-end: 6;   
-    padding: 10em 1em;
+    padding: 3em 1em;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -69,8 +69,5 @@ body::-webkit-scrollbar {
 .error-tip{
     color: red;
     font-family: 'Roboto-Regular';
-}
-.registration-container {
-    padding: 2em;
 }
 

@@ -13,7 +13,7 @@ import os
 from random import choice
 import base64
 from django.forms.models import model_to_dict
-
+from datetime import datetime
 
 
 def create(request):
@@ -67,10 +67,18 @@ def set_auth_image(request):
 def register_user(request):
     if(request.method == 'POST'):
         user_info = json.loads(request.body.decode("UTF-8"))
-        user = User.objects.filter(username=user_info["username"])
+        user = AuthUser.objects.filter(username=user_info["username"])
         response = "fail"
-        if(user == None):
-            response = "exists"
+        if(user != None):
+            user = AuthUser()
+            user.password="reverse"
+            user.email=user_info["email"]
+            user.username=user_info["username"]
+            user.is_active=1
+            user.is_staff=0
+            user.date_joined = datetime.today()
+            user.save()
+            response = "success"
         return JsonResponse({"response": response})
 
 
