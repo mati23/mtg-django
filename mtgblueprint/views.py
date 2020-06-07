@@ -2,21 +2,18 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets, generics, filters
 from mtgblueprint.models import Decks
-from mtgblueprint.model.Cards import  Cards
+from mtgblueprint.model.Cards import Cards
+from mtgblueprint.model.AuthUser import AuthUser
 from .serializers import CardSerializer, UserSerializer, CardDetailSerializer, DeckListSerializer, DeckCrudSerializer
-from django.views.generic import TemplateView
-from rest_framework.views import APIView
 from rest_framework.response import Response
 import json
-import re
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
 import mtgblueprint.customfunctions as cf
 import os
 from random import choice
 import base64
-from PIL import Image
 from django.forms.models import model_to_dict
-import io
+
 
 
 def create(request):
@@ -66,6 +63,15 @@ def set_auth_image(request):
 
         print(encoded_image)
     return JsonResponse({"response": str(encoded_image,"utf-8")})
+
+def register_user(request):
+    if(request.method == 'POST'):
+        user_info = json.loads(request.body.decode("UTF-8"))
+        user = User.objects.filter(username=user_info["username"])
+        response = "fail"
+        if(user == None):
+            response = "exists"
+        return JsonResponse({"response": response})
 
 
 

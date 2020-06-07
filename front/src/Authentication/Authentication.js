@@ -3,28 +3,54 @@ import './authentication.css';
 import { Button, Input, TextField } from '@material-ui/core';
 import axios from 'axios'
 import { useState } from 'react';
+import { useForm } from "react-hook-form";
 
-function Authentication() {
+export default function Authentication() {
     const [backgrondImage, setBackgroundImage] = useState("")
-
+    const [registrationForm, setRegistrationForm] = useState({
+        username: "",
+        email: "",
+        password: "",
+        passwordConfirmation: ""
+    })
+    const [errorMessage, setErrorMessage] = useState("")
     const image = () => {
         let response = axios.get("http://127.0.0.1:8001/auth/set_auth_image/").then(result => {
-
             setBackgroundImage(
                 <img className="gradient-image" src={"data:image/jpg;base64, " + result.data.response}></img>
 
             )
         })
     }
+
+    const register = () => {
+        let registerForm = document.getElementsByClassName("registration_input")
+
+        setRegistrationForm((registrationForm) => ({
+            ...registrationForm,
+            username: registerForm[0].getElementsByTagName("input")[0].value,
+            email: registerForm[1].getElementsByTagName("input")[0].value,
+            password: registerForm[2].getElementsByTagName("input")[0].value,
+            passwordConfirmation: registerForm[3].getElementsByTagName("input")[0].value
+        }))
+
+
+
+        //if (errorMessage == "") {
+        //    let response = axios.post("http://127.0.0.1:8001/auth/register_user/", registrationForm)
+        //}
+
+    }
+
     useEffect(() => {
         image()
     }, [])
 
     useEffect(() => {
-        let image = new Image()
+        console.log(registrationForm)
+    }, [registrationForm])
 
-        console.log(backgrondImage)
-    }, [backgrondImage])
+
     return (
         <div className="authentication">
             <div className="color-overlay">
@@ -37,22 +63,23 @@ function Authentication() {
                 <div className="authentication-form-container">
                     <div className="login">
                         <div className="login-container">
-                            <TextField id="outlined-basic" label="Username or Email" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <TextField id="outlined-basic" label="Password" type="password" variant="outlined" style={{ margin: "2em", width: "90%" }} />
+                            <TextField value={registrationForm.username} label="Username or Email" variant="outlined" style={{ margin: "2em", width: "90%" }} />
+                            <TextField label="Password" type="password" variant="outlined" style={{ margin: "2em", width: "90%" }} />
                             <Button variant="contained" color="primary" className="thin">
                                 Olá Mundo
                         </Button>
                         </div>
                     </div>
                     <div className="registration">
-                        <div className="registration-container">
-                            <TextField id="outlined-basic" label="Username" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <TextField id="outlined-basic" label="Email" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <TextField id="outlined-basic" label="Password" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <TextField id="outlined-basic" label="Repeat Password" variant="outlined" style={{ margin: "2em", width: "90%" }} />
-                            <Button variant="contained" color="primary" className="thin">
-                                Olá Mundo
-                        </Button>
+                        <div className="registration-container" >
+                            <TextField id="registration_username" className="registration_input" label="Username" variant="outlined" style={{ margin: "2em", width: "90%" }} />
+                            <TextField id="registration_email" className="registration_input" label="Email" variant="outlined" style={{ margin: "2em", width: "90%" }} />
+                            <TextField id="registration_password" className="registration_input" label="Password" variant="outlined" style={{ margin: "2em", width: "90%" }} />
+                            <TextField id="registration_confirm_password" className="registration_input" label="Confirm Password" variant="outlined" style={{ margin: "2em", width: "90%" }} />
+                            <Button variant="contained" color="primary" className="thin" onClick={register}>
+                                Register
+                            </Button>
+
                         </div>
                     </div>
                 </div>
@@ -67,4 +94,4 @@ function Authentication() {
     );
 }
 
-export default Authentication;
+

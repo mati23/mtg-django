@@ -66,3 +66,11 @@ body::-webkit-scrollbar {
     height: 100%;
     width: 100%;
 }
+.error-tip{
+    color: red;
+    font-family: 'Roboto-Regular';
+}
+.registration-container {
+    padding: 2em;
+}
+

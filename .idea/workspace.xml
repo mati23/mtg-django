@@ -2,8 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5396efea-ea06-45c4-b8a3-02858c9824fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/AuthGroup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/AuthGroupPermissions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/AuthPermission.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/AuthUser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/AuthUserGroups.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/AuthUserPermissions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/DjangoAdminLog.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/DjangoContentType.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mtgblueprint/model/GeneralInformation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mtgblueprint/model/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mtgblueprint/model/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mtgblueprint/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mtgblueprint/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mtgblueprint/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mtgblueprint/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mtgblueprint/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mtgblueprint/views.py" afterDir="false" />
     </list>
@@ -117,7 +142,8 @@
       <workItem from="1591399590428" duration="34000" />
       <workItem from="1591399641502" duration="43000" />
       <workItem from="1591399709113" duration="7030000" />
-      <workItem from="1591460721025" duration="10345000" />
+      <workItem from="1591460721025" duration="11277000" />
+      <workItem from="1591535946148" duration="5576000" />
     </task>
     <servers />
   </component>
@@ -130,6 +156,14 @@
     </state>
     <state x="418" y="189" width="1084" height="718" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1591477411002" />
     <state x="418" y="196" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1591138544009" />
+    <state x="629" y="333" width="651" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591539295514">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state x="629" y="333" width="651" height="396" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1010@0.27.1920.1010" timestamp="1591539295514" />
+    <state x="693" y="280" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591544554455">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state x="693" y="280" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1591544554455" />
     <state x="634" y="135" width="642" height="792" key="#manage" timestamp="1591217093684">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
@@ -148,51 +182,55 @@
     </state>
     <state x="844" y="277" width="424" height="513" key="FileChooserDialogImpl/0.27.1920.1010@0.27.1920.1010" timestamp="1591308749373" />
     <state x="844" y="288" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1591137534160" />
-    <state width="1874" height="301" key="GridCell.Tab.0.bottom" timestamp="1591480177938">
+    <state width="1874" height="301" key="GridCell.Tab.0.bottom" timestamp="1591545319245">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1874" height="301" key="GridCell.Tab.0.bottom/0.27.1920.1010@0.27.1920.1010" timestamp="1591480177938" />
+    <state width="1874" height="301" key="GridCell.Tab.0.bottom/0.27.1920.1010@0.27.1920.1010" timestamp="1591545319245" />
     <state width="1897" height="344" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1591152320032" />
-    <state width="1874" height="301" key="GridCell.Tab.0.center" timestamp="1591480177937">
+    <state width="1874" height="301" key="GridCell.Tab.0.center" timestamp="1591545319244">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1874" height="301" key="GridCell.Tab.0.center/0.27.1920.1010@0.27.1920.1010" timestamp="1591480177937" />
+    <state width="1874" height="301" key="GridCell.Tab.0.center/0.27.1920.1010@0.27.1920.1010" timestamp="1591545319244" />
     <state width="1897" height="344" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1591152320031" />
-    <state width="1874" height="301" key="GridCell.Tab.0.left" timestamp="1591480177937">
+    <state width="1874" height="301" key="GridCell.Tab.0.left" timestamp="1591545319244">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1874" height="301" key="GridCell.Tab.0.left/0.27.1920.1010@0.27.1920.1010" timestamp="1591480177937" />
+    <state width="1874" height="301" key="GridCell.Tab.0.left/0.27.1920.1010@0.27.1920.1010" timestamp="1591545319244" />
     <state width="1897" height="344" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1591152320031" />
-    <state width="1874" height="301" key="GridCell.Tab.0.right" timestamp="1591480177938">
+    <state width="1874" height="301" key="GridCell.Tab.0.right" timestamp="1591545319244">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1874" height="301" key="GridCell.Tab.0.right/0.27.1920.1010@0.27.1920.1010" timestamp="1591480177938" />
+    <state width="1874" height="301" key="GridCell.Tab.0.right/0.27.1920.1010@0.27.1920.1010" timestamp="1591545319244" />
     <state width="1897" height="344" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1591152320032" />
-    <state width="1874" height="301" key="GridCell.Tab.1.bottom" timestamp="1591480177808">
+    <state width="1874" height="301" key="GridCell.Tab.1.bottom" timestamp="1591545319140">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1874" height="301" key="GridCell.Tab.1.bottom/0.27.1920.1010@0.27.1920.1010" timestamp="1591480177808" />
+    <state width="1874" height="301" key="GridCell.Tab.1.bottom/0.27.1920.1010@0.27.1920.1010" timestamp="1591545319140" />
     <state width="1897" height="344" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1591152315055" />
-    <state width="1874" height="301" key="GridCell.Tab.1.center" timestamp="1591480177807">
+    <state width="1874" height="301" key="GridCell.Tab.1.center" timestamp="1591545319140">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1874" height="301" key="GridCell.Tab.1.center/0.27.1920.1010@0.27.1920.1010" timestamp="1591480177807" />
+    <state width="1874" height="301" key="GridCell.Tab.1.center/0.27.1920.1010@0.27.1920.1010" timestamp="1591545319140" />
     <state width="1897" height="344" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1591152315055" />
-    <state width="1874" height="301" key="GridCell.Tab.1.left" timestamp="1591480177807">
+    <state width="1874" height="301" key="GridCell.Tab.1.left" timestamp="1591545319140">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1874" height="301" key="GridCell.Tab.1.left/0.27.1920.1010@0.27.1920.1010" timestamp="1591480177807" />
+    <state width="1874" height="301" key="GridCell.Tab.1.left/0.27.1920.1010@0.27.1920.1010" timestamp="1591545319140" />
     <state width="1897" height="344" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1591152315055" />
-    <state width="1874" height="301" key="GridCell.Tab.1.right" timestamp="1591480177807">
+    <state width="1874" height="301" key="GridCell.Tab.1.right" timestamp="1591545319140">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state width="1874" height="301" key="GridCell.Tab.1.right/0.27.1920.1010@0.27.1920.1010" timestamp="1591480177807" />
+    <state width="1874" height="301" key="GridCell.Tab.1.right/0.27.1920.1010@0.27.1920.1010" timestamp="1591545319140" />
     <state width="1897" height="344" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1591152315055" />
     <state x="331" y="94" key="SettingsEditor" timestamp="1591477719942">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
     <state x="331" y="94" key="SettingsEditor/0.27.1920.1010@0.27.1920.1010" timestamp="1591477719942" />
     <state x="786" y="125" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1591138532398" />
+    <state width="960" height="506" key="XDebugger.FullValuePopup" timestamp="1591544276401">
+      <screen x="0" y="27" width="1920" height="1010" />
+    </state>
+    <state width="960" height="506" key="XDebugger.FullValuePopup/0.27.1920.1010@0.27.1920.1010" timestamp="1591544276401" />
     <state x="616" y="359" key="com.intellij.ide.util.TipDialog" timestamp="1591308919488">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
@@ -206,16 +244,16 @@
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
     <state x="841" y="327" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey/0.27.1920.1010@0.27.1920.1010" timestamp="1585532697035" />
-    <state x="650" y="139" width="704" height="783" key="find.popup" timestamp="1591308024604">
+    <state x="650" y="139" width="704" height="783" key="find.popup" timestamp="1591544991608">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
-    <state x="650" y="139" width="704" height="783" key="find.popup/0.27.1920.1010@0.27.1920.1010" timestamp="1591308024604" />
+    <state x="650" y="139" width="704" height="783" key="find.popup/0.27.1920.1010@0.27.1920.1010" timestamp="1591544991608" />
     <state x="685" y="445" width="540" height="172" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1591399620564">
       <screen x="0" y="27" width="1920" height="1010" />
     </state>
     <state x="685" y="445" width="540" height="172" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.27.1920.1010@0.27.1920.1010" timestamp="1591399620564" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/mtgblueprint$manage.coverage" NAME="manage Coverage Results" MODIFIED="1591480429752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mtgblueprint$manage.coverage" NAME="manage Coverage Results" MODIFIED="1591545319109" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
