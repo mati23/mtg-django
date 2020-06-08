@@ -5,6 +5,10 @@ body{
   font-family: 'Roboto-Regular';
   src: url('./Homepage/Roboto-Regular.ttf') format('truetype');
 }
+@font-face{
+  font-family: 'Roboto-Bold';
+  src: url('./Homepage/Roboto-Bold.ttf') format('truetype');
+}
 .App {
   text-align: center;
 }

@@ -1,3 +1,10 @@
 .center-div{
     flex-grow: 1;
 }
+.welcome-container{
+    font-family: 'Roboto-Regular';
+    display: flex;
+}
+.user-name{
+    font-family: 'Roboto-Bold';
+}

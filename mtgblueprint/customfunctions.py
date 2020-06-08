@@ -2,6 +2,8 @@ import json
 import re
 import mtgblueprint.constants as c
 from mtgblueprint.model.Cards import Cards
+import hashlib
+import secrets
 
 def search_dict_in_array(array, value):
     if array == None or  len(array) <= 0:
@@ -52,3 +54,7 @@ def add_mana_counter_to_global_counter(card_list):
                     global_deck_counter = search_dict_in_array(global_deck_counter, match.group(1))
 
     return global_deck_counter
+
+def generate_token():
+    token =  secrets.token_hex(16)
+    return token

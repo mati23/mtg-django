@@ -64,6 +64,21 @@ def set_auth_image(request):
         print(encoded_image)
     return JsonResponse({"response": str(encoded_image,"utf-8")})
 
+def login_user(request):
+    if(request.method == 'POST'):
+        user_info = json.loads(request.body.decode("UTF-8"))
+        try:
+            user = AuthUser.objects.get(username=user_info.get('username'))
+            response = "login failed"
+            if(user!=None and user.password == user_info["password"]):
+                user.token = cf.generate_token()
+                user.save()
+                response= "success"
+            return JsonResponse({"response": response, "token":user.token, "username":user.username})
+        except:
+            return JsonResponse({"response": str(NameError)})
+
+
 def register_user(request):
     if(request.method == 'POST'):
         user_info = json.loads(request.body.decode("UTF-8"))

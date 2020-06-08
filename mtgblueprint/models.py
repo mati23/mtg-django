@@ -10,12 +10,13 @@ import json
 import re
 import mtgblueprint.constants as c
 import mtgblueprint.customfunctions as cf
+from mtgblueprint.model.AuthUser import AuthUser
 
 
 class Decks(models.Model):
     id = models.IntegerField(primary_key=True)
     deck_description = models.CharField(max_length=255, blank=True, null=True)
-    user_id = models.IntegerField()
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
     card_list = models.CharField(blank=True, null=True)
     created_at = models.DateField()
     updated_at = models.DateField()

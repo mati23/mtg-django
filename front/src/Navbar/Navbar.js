@@ -7,7 +7,8 @@ import {
     useHistory
 } from "react-router-dom";
 import './navbar.css'
-import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Button, Menu, MenuItem } from '@material-ui/core';
+import { useEffect } from 'react';
 
 function Navbar() {
     const history = useHistory()
@@ -17,6 +18,22 @@ function Navbar() {
     const showAuthPage = () => {
         return history.push("/auth")
     }
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget)
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
+    const logout = () => {
+        window.sessionStorage.clear()
+        window.location.reload()
+    }
+    useEffect(() => {
+        console.log(window.sessionStorage)
+    }, [])
     return (
         <div>
             <AppBar position="static">
@@ -26,10 +43,30 @@ function Navbar() {
                     </IconButton>
                     <Button style={{ color: "#fff" }} onClick={showDeckList}>Decks</Button>
                     <div className="center-div"></div>
-                    <Button style={{ color: "#fff" }} onClick={showAuthPage} edge="end">Login</Button>
+                    {
+                        window.sessionStorage.getItem('username') == null ?
+                            < Button style={{ color: "#fff" }} onClick={showAuthPage} edge="end">Login</Button> :
+                            <div className="welcome-container" onClick={handleClick}>
+                                Welcome, 	&nbsp;
+                                <div className="user-name">{window.sessionStorage.getItem('username')}</div>
+                                !
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                >
+                                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                                    <MenuItem onClick={logout}>Logout</MenuItem>
+                                </Menu>
+                            </div>
+
+                    }
+
                 </Toolbar>
             </AppBar>
-        </div>
+        </div >
     );
 }
 

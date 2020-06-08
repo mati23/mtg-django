@@ -229,11 +229,7 @@ function DeckDetails() {
 
                         },
                         tooltip: {},
-                        legend: {
-                            data: ['Sales']
-                        },
                         series: [{
-                            name: 'Sales',
                             type: 'pie',
                             radius: '70%',
                             center: ['50%', '50%'],

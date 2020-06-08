@@ -4,14 +4,28 @@ import { Button, Input, TextField } from '@material-ui/core';
 import axios from 'axios'
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
+import {
+    useHistory
+} from "react-router-dom";
+
 
 export default function Authentication() {
+    let history = useHistory()
     const [backgrondImage, setBackgroundImage] = useState("")
+    const [loginForm, setLoginForm] = useState({
+        username: "",
+        password: ""
+    })
     const [registrationForm, setRegistrationForm] = useState({
         username: "",
         email: "",
         password: "",
         passwordConfirmation: ""
+    })
+    useEffect(() => {
+        if (window.sessionStorage.getItem('username') !== null || window.sessionStorage.length > 0) {
+            history.push('/')
+        }
     })
     const [errorMessage, setErrorMessage] = useState("")
     const image = () => {
@@ -22,10 +36,17 @@ export default function Authentication() {
             )
         })
     }
+    const login = () => {
+        let htmlLoginForm = document.getElementsByClassName("login_input")
+        setLoginForm((loginForm) => ({
+            ...loginForm,
+            username: htmlLoginForm[0].getElementsByTagName("input")[0].value,
+            password: htmlLoginForm[1].getElementsByTagName("input")[0].value,
+        }))
+    }
 
     const register = () => {
         let registerForm = document.getElementsByClassName("registration_input")
-
         setRegistrationForm((registrationForm) => ({
             ...registrationForm,
             username: registerForm[0].getElementsByTagName("input")[0].value,
@@ -48,6 +69,21 @@ export default function Authentication() {
         }
     }, [registrationForm])
 
+    useEffect(() => {
+        if (loginForm.username != "" && loginForm.password != "") {
+            let response = axios.post("http://127.0.0.1:8001/login_user/", loginForm).then(
+                result => {
+                    if (result.data.response == "success" && result.data.username) {
+                        window.sessionStorage.setItem('username', result.data.username)
+                        window.sessionStorage.setItem('token', result.data.token)
+                        history.push('/')
+                    }
+                    console.log(result)
+                }
+            )
+        }
+    }, [loginForm])
+
 
     return (
         <div className="authentication">
@@ -62,9 +98,9 @@ export default function Authentication() {
                     <div className="login">
                         <div className="login-container">
                             <h2 style={{ alignSelf: 'self-end', fontFamily: 'Roboto-Regular', fontSize: '3em' }}>Login</h2>
-                            <TextField value={registrationForm.username} label="Username or Email" variant="outlined" style={{ width: "100%" }} />
-                            <TextField label="Password" type="password" variant="outlined" style={{ width: "100%" }} />
-                            <Button variant="contained" color="primary" className="thin" style={{ gridRowStart: "6" }}>
+                            <TextField className="login_input" label="Username or Email" variant="outlined" style={{ width: "100%" }} />
+                            <TextField className="login_input" label="Password" type="password" variant="outlined" style={{ width: "100%" }} />
+                            <Button onClick={login} variant="contained" color="primary" className="thin" style={{ gridRowStart: "6" }}>
                                 Olá Mundo
                             </Button>
                         </div>
