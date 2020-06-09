@@ -26,6 +26,9 @@ class Decks(models.Model):
     def getCardList(self):
         return self.card_list
 
+    def toJson(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
+
     def check_quantity_before_insert(self, id, quantity):
         if self.card_list != None:
             card_list_object = json.loads(self.card_list)

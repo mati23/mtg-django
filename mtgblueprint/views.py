@@ -74,7 +74,7 @@ def login_user(request):
                 user.token = cf.generate_token()
                 user.save()
                 response= "success"
-            return JsonResponse({"response": response, "token":user.token, "username":user.username})
+            return JsonResponse({"response": response, "token":user.token, "userId":user.id, "username":user.username})
         except:
             return JsonResponse({"response": str(NameError)})
 
@@ -86,17 +86,24 @@ def register_user(request):
         response = "fail"
         if(user != None):
             user = AuthUser()
-            user.password="reverse"
-            user.email=user_info["email"]
-            user.username=user_info["username"]
-            user.is_active=1
-            user.is_staff=0
+            user.password = "reverse"
+            user.email = user_info["email"]
+            user.username = user_info["username"]
+            user.is_active = 1
+            user.is_staff = 0
             user.date_joined = datetime.today()
             user.save()
             response = "success"
         return JsonResponse({"response": response})
 
+def get_deck_by_user(request):
+    if request.method == 'POST':
+        request_info = json.loads(request.body.decode("UTF-8"))
+        decks = []
+        for deck in Decks.objects.filter(user=int(request_info.get("userId"))):
+            decks.append(deck.toJson())
 
+        return JsonResponse({"response": decks})
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -142,8 +149,11 @@ class DeckListView(generics.ListAPIView):
     queryset = Decks.objects.all()
 
     def get_queryset(self):
-        decks = Decks.objects.all()
+        print(self.request)
+        request = self.request.data
+        decks = Decks.objects.filter(user=request.get('userId'))
         return decks
+
 
 
 class DeckDetailView(generics.ListAPIView):

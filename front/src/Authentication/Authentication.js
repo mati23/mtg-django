@@ -76,6 +76,7 @@ export default function Authentication() {
                     if (result.data.response == "success" && result.data.username) {
                         window.sessionStorage.setItem('username', result.data.username)
                         window.sessionStorage.setItem('token', result.data.token)
+                        window.sessionStorage.setItem('userId', result.data.userId)
                         history.push('/')
                     }
                     console.log(result)

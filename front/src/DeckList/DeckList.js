@@ -38,34 +38,37 @@ function DeckList() {
         history.push('/deck/' + id + '/', { id: id })
     }
     useEffect(() => {
-        axios.get('http://127.0.0.1:8001/deck-list/').then(
-            (data) => {
-                console.log(data)
-                data.data.map((item) => {
-                    console.log(item)
-                    setDecks(decks => [...decks,
-                    <Card className="card-container" key={item.id}>
-                        < CardContent >
-                            <Typography variant="h4" className="" color="textSecondary">
-                                {item.deck_description}
-                            </Typography>
-                            <div className="deck-thumbnail">
+        if (sessionStorage.getItem("userId") != null) {
+            axios.post('http://127.0.0.1:8001/deck-list/', { userId: sessionStorage.getItem("userId") }).then(
+                data => {
+                    console.log(data)
+                    data.data.response.map((item) => {
+                        item = JSON.parse(item)
+                        setDecks(decks => [...decks,
+                        <Card className="card-container" key={item.id}>
+                            < CardContent >
+                                <Typography variant="h4" className="" color="textSecondary">
+                                    {item.deck_description}
+                                </Typography>
+                                <div className="deck-thumbnail">
 
-                            </div>
-                            <Typography className="" color="textSecondary">
-                                Colors
-                            </Typography>
-                        </CardContent >
-                        <CardActions>
-                            <Button className="open-deck-button" onClick={() => openCardDetails(item.id)}>Open Deck</Button>
-                        </CardActions>
-                    </Card >])
+                                </div>
+                                <Typography className="" color="textSecondary">
+                                    Colors
+                                </Typography>
+                            </CardContent >
+                            <CardActions>
+                                <Button className="open-deck-button" onClick={() => openCardDetails(item.id)}>Open Deck</Button>
+                            </CardActions>
+                        </Card >])
 
-                })
+                    })
 
-            }
-        ).catch(error => { console.log(error) })
-
+                }
+            ).catch(error => { console.log(error) })
+        } else {
+            console.log("you are not logged in")
+        }
     }, [])
 
     return (

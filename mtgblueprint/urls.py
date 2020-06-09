@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^cards/(?P<name>.+)/$', CardsListView.as_view()),
     url(r'^card/(?P<pk>.+)/$', CardDetailView.as_view()),
     url(r'^deck/(?P<pk>.+)/$', DeckDetailView.as_view()),
-    url(r'^deck-list/$', DeckListView.as_view()),
+    url(r'^deck-list/$', csrf_exempt(views.get_deck_by_user)),
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
