@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { createContext, useState, useContext } from 'react'
 
-const Context = React.createContext()
+export const CardInformationContainerContext = createContext()
 
-export const ContextProvider = Context.Provider
-export const ContextConsumer = Context.Consumer
+export default function CardInformationContainerContextProvider({ children }) {
+    const [cardVisible, setCardVisible] = useState(true)
 
-export default Context
+    return (
+        <CardInformationContainerContext.Provider value={{ cardVisible, setCardVisible }}>
+            {children}
+        </CardInformationContainerContext.Provider>
+    )
+}
+
+export function useCardInformationContext() {
+    const context = useContext(CardInformationContainerContext)
+    if (!context) throw new Error("useCount must be used within a CountProvider");
+    const { cardVisible, setCardVisible } = context
+    return { cardVisible, setCardVisible }
+}

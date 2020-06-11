@@ -31,12 +31,13 @@
 .card-quantity-button{
     margin: 0 1em!important;
 }
-.card-thumbnail img{
+.card-thumbnail .img-container img{
     -webkit-box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);
     box-shadow: 3px 0px 15px -5px rgba(0,0,0,0.75);    
     background: transparent!important;
-    height: 20em;    
+    height: 20em;   
+    width: 224px;
 }
 .description-container{
     display: grid;

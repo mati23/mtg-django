@@ -43,8 +43,6 @@ function Homepage() {
                 })
                 map.forEach((value, key) => {
                     newManaArray.push(value)
-                    console.log(key, value, newManaArray)
-
                 })
                 setManaCount(newManaArray)
             })

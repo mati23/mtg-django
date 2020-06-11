@@ -6,9 +6,10 @@ import { useParams } from 'react-router-dom';
 import { useSpring, animated } from 'react-spring'
 import './deck-details.css'
 import CardSearcher from '../CardSearcher/CardSearcher';
-import Context, { ContextProvider } from '../Context/Context';
+import Context, { ContextProvider, CardInformationContainerContext } from '../Context/Context';
 import { CardThumbNail } from '../CardThumbnail/CardThumbnail';
 import ReactEcharts from "echarts-for-react";
+import CardInformationContainerContextProvider from '../Context/Context';
 
 
 
@@ -202,6 +203,7 @@ function DeckDetails() {
 
 
     return (
+
         <div className="deck-detail-container">
             <div className="centralized-container">
                 <CardSearcher deckId={params.id} openDialog={(new_message) => openDialog(new_message)}></CardSearcher>
@@ -211,7 +213,9 @@ function DeckDetails() {
                     <div className="description-container-right">{updatableCardHasChanges == false ? "" : <Fade in={updatableCardHasChanges}><Button color="primary" variant="contained" onClick={saveChanges}>SAVE CHANGES</Button></Fade>}</div>
                 </div>
                 <div className="deck-thumbnails">
-                    {cardList}
+                    <CardInformationContainerContextProvider>
+                        {cardList}
+                    </CardInformationContainerContextProvider>
                 </div>
             </div>
             <div className="chart-container">
@@ -257,6 +261,7 @@ function DeckDetails() {
                 </div>
             </Dialog>
         </div >
+
     )
 }
 export default DeckDetails;

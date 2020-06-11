@@ -67,6 +67,7 @@ function DeckList() {
                 }
             ).catch(error => { console.log(error) })
         } else {
+            history.push({ pathname: '/auth/', state: "You are not logged in. Please sign in or create your account." })
             console.log("you are not logged in")
         }
     }, [])

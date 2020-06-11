@@ -77,13 +77,11 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
         let object = getObjectById(selectedCardId)
     }
     const saveCardIntoDeck = (event, value) => {
-        console.log('valor: ', value)
         let response = axios.post("http://127.0.0.1:8001/deck/create", {
             "id": value.id,
             "quantity": value.quantity,
             "deckId": value.deckId
         }).then(result => {
-            console.log("enviou opendialog", result)
             openDialog(result.data.response)
         })
     }

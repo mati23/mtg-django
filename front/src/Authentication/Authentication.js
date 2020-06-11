@@ -1,27 +1,39 @@
 import React, { useEffect } from 'react';
 import './authentication.css';
-import { Button, Input, TextField } from '@material-ui/core';
+import { Button, Input, TextField, Dialog } from '@material-ui/core';
 import axios from 'axios'
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import {
-    useHistory
+    useHistory, useLocation
 } from "react-router-dom";
 
 
 export default function Authentication() {
     let history = useHistory()
+    let location = useLocation()
     const [backgrondImage, setBackgroundImage] = useState("")
+    const [dialogComponent, setDialogComponent] = useState("")
     const [loginForm, setLoginForm] = useState({
         username: "",
         password: ""
     })
+    const [params, setParams] = useState("")
+    const [dialog, setDialog] = useState(true)
     const [registrationForm, setRegistrationForm] = useState({
         username: "",
         email: "",
         password: "",
         passwordConfirmation: ""
     })
+
+    useEffect(() => {
+        console.log(location)
+        if (location.state != null && location.state != "") {
+            setDialog(true)
+        }
+    }, [])
+
     useEffect(() => {
         if (window.sessionStorage.getItem('username') !== null || window.sessionStorage.length > 0) {
             history.push('/')
@@ -32,7 +44,6 @@ export default function Authentication() {
         let response = axios.get("http://127.0.0.1:8001/auth/set_auth_image/").then(result => {
             setBackgroundImage(
                 <img className="gradient-image" src={"data:image/jpg;base64, " + result.data.response}></img>
-
             )
         })
     }
@@ -61,10 +72,9 @@ export default function Authentication() {
     }, [])
 
     useEffect(() => {
-        console.log(registrationForm)
         if (registrationForm.username != "" && registrationForm.password != "" && registrationForm.passwordConfirmation != "" && registrationForm.email != "") {
             let response = axios.post("http://127.0.0.1:8001/auth/register_user/", registrationForm).then(result => {
-                console.log(result)
+
             })
         }
     }, [registrationForm])
@@ -79,15 +89,25 @@ export default function Authentication() {
                         window.sessionStorage.setItem('userId', result.data.userId)
                         history.push('/')
                     }
-                    console.log(result)
                 }
             )
         }
     }, [loginForm])
 
+    const closeDialog = () => {
+        setDialog(false)
+    }
 
     return (
         <div className="authentication">
+            <Dialog className="authentication-dialog" onBackdropClick={closeDialog} aria-labelledby="customized-dialog-title" open={dialog}>
+                <div className="dialog-container">
+                    <div className="icon-container"><i class="fas fa-id-card-alt create-account"></i></div>
+                    <div className="dialog-message">
+                        {location.state}
+                    </div>
+                </div>
+            </Dialog>
             <div className="color-overlay">
 
             </div>
@@ -102,7 +122,7 @@ export default function Authentication() {
                             <TextField className="login_input" label="Username or Email" variant="outlined" style={{ width: "100%" }} />
                             <TextField className="login_input" label="Password" type="password" variant="outlined" style={{ width: "100%" }} />
                             <Button onClick={login} variant="contained" color="primary" className="thin" style={{ gridRowStart: "6" }}>
-                                Olá Mundo
+                                LOGIN
                             </Button>
                         </div>
                     </div>
@@ -114,14 +134,12 @@ export default function Authentication() {
                             <TextField id="registration_password" className="registration_input" label="Password" variant="outlined" style={{ width: "100%" }} />
                             <TextField id="registration_confirm_password" className="registration_input" label="Confirm Password" variant="outlined" style={{ width: "100%" }} />
                             <Button variant="contained" color="primary" className="thin" onClick={register} style={{ gridRowStart: "6" }}>
-                                Register
+                                REGISTER
                             </Button>
 
                         </div>
                     </div>
                 </div>
-
-
                 <div className="artwork">
 
                 </div>
