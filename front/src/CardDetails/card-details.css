@@ -49,6 +49,7 @@
       flex-direction: column;
       padding: 2em 2em!important;
       min-width: 600px;
+      align-items: center;
   }
   .dialog-icon{
       text-align: center;

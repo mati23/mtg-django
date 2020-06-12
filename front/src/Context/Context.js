@@ -1,9 +1,9 @@
 import React, { createContext, useState, useContext } from 'react'
 
-export const CardInformationContainerContext = createContext()
+const CardInformationContainerContext = createContext()
 
 export default function CardInformationContainerContextProvider({ children }) {
-    const [cardVisible, setCardVisible] = useState(true)
+    const [cardVisible, setCardVisible] = useState(false)
 
     return (
         <CardInformationContainerContext.Provider value={{ cardVisible, setCardVisible }}>

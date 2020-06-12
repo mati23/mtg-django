@@ -14,12 +14,19 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
     const [cardDetail, setCardDetail] = useState([])
     const [cardBlur, setCardBlur] = useState(false)
     const [cardInfoVisibility, setCardInfoVisibility] = useState(false)
-    const [props, setProps] = useSpring(() => ({ height: '0px', position: 'absolute', background: '#ff0', margin: '1em 0' }))
+    const [props, setProps] = useSpring(() => ({ height: '0px', position: 'absolute', background: '#ff0', margin: '1em 0', opacity: '0' }))
 
-    const { cardInformationContext } = useCardInformationContext()
+    const { cardVisible, setCardVisible } = useCardInformationContext()
 
     useEffect(() => {
-        console.log(item.id)
+        console.log(cardVisible)
+        if (cardVisible === true) {
+            setProps({ height: '0px', opacity: '0' })
+            setCardVisible(false)
+        }
+    }, [cardVisible])
+
+    useEffect(() => {
         getObjectById(item.id)
     }, [])
     useEffect(() => {
@@ -36,7 +43,6 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
     const increaseCounter = (cardId) => {
         if (defaultQuantity <= 3) {
             setDefaultQuantity(defaultQuantity + 1)
-
         }
     }
     const decreaseCounter = (cardId) => {
@@ -45,10 +51,10 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
             setChangedState(!changedState)
         }
     }
+
     function getObjectById(id) {
         if (id !== "" && id !== null && id !== undefined) {
             let response = axios.get('http://127.0.0.1:8001/card/' + id + "/").then(result => {
-                console.log(result.data)
                 setCardDetail(result.data)
             }).catch(error => { console.log(error) })
             return response
@@ -56,23 +62,25 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
     }
     const changeCardBlur = (visibility) => {
         setCardBlur(visibility)
-        console.log("entrou")
     }
     const expandCardInfo = () => {
+        //setCardInformationContext(false)
         setCardInfoVisibility(!cardInfoVisibility)
+        setCardVisible(true)
     }
 
     useEffect(() => {
-        if (cardInfoVisibility === true) {
-            setProps({ height: '400px' })
+        if (cardInfoVisibility) {
+            setProps({ height: '400px', opacity: '1' })
         } else {
-            setProps({ height: '0px' })
+            setProps({ height: '0px', opacity: '0' })
         }
     }, [cardInfoVisibility])
+
     return (
         <div className="card-thumbnail">
-            <div>
-                {cardInfoVisibility}
+            <div style={{ background: "#aaa", position: 'absolute', zIndex: '9999', width: '100px', height: '100px', fontWeight: 'bold' }}>
+                {cardVisible ? "true" : "false"}
             </div>
             <div className="card-thumbnail-quantity" onMouseOver={showButtons} onMouseOut={hideButtons}>
                 <div style={{ visibility: quantityButtonsVisibility == true ? "visible" : "hidden" }}>
@@ -93,13 +101,13 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
                 </div>
                 <div className={cardBlur ? "blured-image" : "blured-image-container"} onClick={expandCardInfo} >
                     <div className="icon-container">
-                        <i class="fas fa-search search-icon-big"></i>
+                        <i className="fas fa-search search-icon-big"></i>
                     </div>
                 </div>
 
             </div>
             <animated.div className={"card-information-container"} style={props}>
-
+                {cardDetail.name}
             </animated.div>
         </div>
     )
