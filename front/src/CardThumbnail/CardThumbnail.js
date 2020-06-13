@@ -6,6 +6,48 @@ import { useEffect } from 'react';
 import axios from 'axios'
 import { animated, useSpring } from 'react-spring'
 import { useCardInformationContext } from '../Context/Context'
+
+function replaceManaTagForNames(manaObject) {
+    switch (manaObject.color) {
+        case 'number':
+            manaObject.color = 'Generic'
+            manaObject.hex = '#5A5A5A'
+            manaObject.fontHex = '#fff'
+
+            return manaObject
+        case 'U':
+            manaObject.color = 'Blue'
+            manaObject.hex = '#1E9CEE'
+            manaObject.fontHex = '#fff'
+            return manaObject
+        case 'B':
+            manaObject.color = 'Black'
+            manaObject.hex = '#363636'
+            manaObject.fontHex = '#fff'
+            return manaObject
+        case 'W':
+            manaObject.color = 'White'
+            manaObject.hex = '#ffeba5'
+            manaObject.fontHex = '#363636'
+            return manaObject
+        case 'R':
+            manaObject.color = 'Red'
+            manaObject.hex = '#FF3860'
+            manaObject.fontHex = '#fff'
+            return manaObject
+        case 'G':
+            manaObject.color = 'Green'
+            manaObject.hex = '#47C774'
+            manaObject.fontHex = '#fff'
+            return manaObject
+        case 'S':
+            manaObject.color = 'Snow'
+            manaObject.hex = '#a2eff2'
+            manaObject.fontHex = '#86ccc1'
+            return manaObject
+    }
+}
+
 export const CardThumbNail = ({ item, data, updateCardList }) => {
     const [quantityButtonsVisibility, setQuantityButtonsVisibility] = useState(false)
     const [defaultQuantity, setDefaultQuantity] = useState(item.quantity)
@@ -14,12 +56,45 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
     const [cardDetail, setCardDetail] = useState([])
     const [cardBlur, setCardBlur] = useState(false)
     const [cardInfoVisibility, setCardInfoVisibility] = useState(false)
-    const [props, setProps] = useSpring(() => ({ height: '0px', position: 'absolute', background: '#ff0', margin: '1em 0', opacity: '0' }))
+    const [props, setProps] = useSpring(() => ({ height: '0px', position: 'absolute', background: '#fafafa', margin: '1em 0', opacity: '0' }))
+
+    const [manaTags, setManaTags] = useState([])
+    const [manaCounter, setManaCounter] = useState([])
 
     const { cardVisible, setCardVisible } = useCardInformationContext()
 
+
     useEffect(() => {
-        console.log(cardVisible)
+        if (cardDetail.mana_counter != undefined) {
+            setManaCounter(manaCounter => [...manaCounter, JSON.parse(cardDetail.mana_counter)])
+        }
+    }, [cardDetail])
+
+    useEffect(() => {
+        console.log(cardDetail)
+        if (manaCounter !== undefined && manaCounter.length > 0) {
+            manaCounter.map(item => {
+                if (item !== undefined && item.length > 0) {
+                    item.map(inner => {
+                        inner = replaceManaTagForNames(inner)
+                        setManaTags(manaTags => [...manaTags,
+                        <div className="mana-counter-tag">
+                            <div className="mana-counter-color" style={{ background: inner.hex, color: inner.fontHex }}>
+                                {inner.color}
+                            </div>
+                            <div className="mana-counter-quantity">
+                                {inner.quantity}
+                            </div>
+                        </div>
+                        ])
+                    })
+                }
+            })
+        }
+        // console.log(manaTags)
+    }, [manaCounter])
+
+    useEffect(() => {
         if (cardVisible === true) {
             setProps({ height: '0px', opacity: '0' })
             setCardVisible(false)
@@ -60,6 +135,12 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
             return response
         }
     }
+
+
+    useEffect(() => {
+
+    }, [manaCounter])
+
     const changeCardBlur = (visibility) => {
         setCardBlur(visibility)
     }
@@ -71,7 +152,7 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
 
     useEffect(() => {
         if (cardInfoVisibility) {
-            setProps({ height: '400px', opacity: '1' })
+            setProps({ height: '700px', opacity: '1' })
         } else {
             setProps({ height: '0px', opacity: '0' })
         }
@@ -79,9 +160,6 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
 
     return (
         <div className="card-thumbnail">
-            <div style={{ background: "#aaa", position: 'absolute', zIndex: '9999', width: '100px', height: '100px', fontWeight: 'bold' }}>
-                {cardVisible ? "true" : "false"}
-            </div>
             <div className="card-thumbnail-quantity" onMouseOver={showButtons} onMouseOut={hideButtons}>
                 <div style={{ visibility: quantityButtonsVisibility == true ? "visible" : "hidden" }}>
                     <Button className="red-background card-quantity-button" size="small" variant="contained" onClick={() => decreaseCounter(item.id)}>
@@ -107,7 +185,63 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
 
             </div>
             <animated.div className={"card-information-container"} style={props}>
-                {cardDetail.name}
+
+                <div className="card-visual">
+                    <div className="card-title">
+                        {cardDetail.name}
+                    </div>
+                    <div className="image-big">
+                        <img src={data.data.image_large} alt="" />
+                    </div>
+                    div 1
+                </div>
+                <div className="card-stats">
+                    <div style={{ width: '100%', padding: '5em' }}>
+                        <div className="mana-tags-container">
+                            {manaTags}
+                        </div>
+                        <div className="stats-name">
+                            <div className="stats-title" >Type:</div>
+                            <div className="stats-value">{cardDetail.type_line}</div>
+                        </div>
+                        <div className="stats-name">
+                            <div className="stats-title" >Artist:</div>
+                            <div className="stats-value" >{cardDetail.artist}</div>
+                        </div>
+                        <div className="stats-name">
+                            <div className="stats-title" >Border Color:</div>
+                            <div className="stats-value">{cardDetail.border_color}</div>
+                        </div>
+
+                        <div className="stats-name">
+                            <div className="stats-title" >Frame:</div>
+                            <div className="stats-value">{cardDetail.frame}</div>
+                        </div>
+
+                        <div className="stats-name">
+                            <div className="stats-title" >Rarity:</div>
+                            <div className="stats-value">{cardDetail.rarity}</div>
+                        </div>
+
+                        <div className="stats-name">
+                            <div className="stats-title" >Collector Number:</div>
+                            <div className="stats-value">{cardDetail.collector_number}</div>
+                        </div>
+                        <div className="stats-name">
+                            <div className="stats-title" >Release Date:</div>
+                            <div className="stats-value">{cardDetail.released_at}</div>
+                        </div>
+                        <div className="stats-name">
+                            <div className="stats-title" >Set Name:</div>
+                            <div className="stats-value">{cardDetail.set_name} ({cardDetail.set})</div>
+                        </div>
+
+                        <div className="stats-name">
+                            <div className="stats-title" >Set Type:</div>
+                            <div className="stats-value">{cardDetail.set_type}</div>
+                        </div>
+                    </div>
+                </div>
             </animated.div>
         </div>
     )

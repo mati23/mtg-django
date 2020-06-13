@@ -53,8 +53,8 @@
 }
 .chart-container{
 width: 100%;
-margin: 2em 0;
-padding: 2em 0;
+margin: 4em 0;
+padding: 4em 0;
 background: -moz-linear-gradient(-45deg, rgba(36,36,36,1) 0%, rgba(61,61,61,1) 45%, rgba(61,61,61,1) 54%, rgba(61,61,61,1) 100%);
 background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(36,36,36,1)), color-stop(45%, rgba(61,61,61,1)), color-stop(54%, rgba(61,61,61,1)), color-stop(100%, rgba(61,61,61,1)));
 background: -webkit-linear-gradient(-45deg, rgba(36,36,36,1) 0%, rgba(61,61,61,1) 45%, rgba(61,61,61,1) 54%, rgba(61,61,61,1) 100%);

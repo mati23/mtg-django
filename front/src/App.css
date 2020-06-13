@@ -9,6 +9,14 @@ body{
   font-family: 'Roboto-Bold';
   src: url('./Homepage/Roboto-Bold.ttf') format('truetype');
 }
+@font-face{
+  font-family: 'Roboto-Thin';
+  src: url('./Homepage/Roboto-Thin.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Oswald';
+  src: url('./Homepage/Oswald-VariableFont_wght.ttf') format('truetype');
+}
 .App {
   text-align: center;
 }

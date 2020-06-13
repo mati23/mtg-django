@@ -67,7 +67,6 @@ function DeckDetails() {
     }, [])
 
     useEffect(() => {
-        console.log("manaCount:", manaCount)
         setGraphColors(attributeStringToColor(manaCount))
     }, [manaCount])
     function checkForUpdatedValues() {
@@ -91,7 +90,7 @@ function DeckDetails() {
                     }
                 })
                 setManaCount(newManaArray)
-                console.log('result', json_result)
+
             })
     }
     const updateCardList = useCallback((cardId, quantity) => {
@@ -101,15 +100,11 @@ function DeckDetails() {
                     index.new_quantity = quantity
                     checkForUpdatedValues()
                     setNewCardArray(cardArray)
-                    //console.log(newCardArray)
                 }
             })
         }
     }, [cardArray])
 
-    useEffect(() => {
-        console.log("teste")
-    }, [updatableCardHasChanges])
 
     useEffect(() => {
 
@@ -169,7 +164,9 @@ function DeckDetails() {
     }, [])
 
     useEffect(() => {
-        deck.card_list == null || deck.card_list == undefined ? console.log("") : getCardList(deck.card_list)
+        if (deck.card_list != null || deck.card_list != undefined) {
+            getCardList(deck.card_list)
+        }
     }, [])
 
     let [loading, setLoading] = useState(true)

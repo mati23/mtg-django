@@ -1,4 +1,5 @@
 from django.db import models
+import mtgblueprint.customfunctions as cf
 
 class Cards(models.Model):
     id = models.CharField(primary_key=True, max_length=255)
@@ -52,6 +53,9 @@ class Cards(models.Model):
     prints_search_uri = models.CharField(max_length=255, blank=True, null=True)
     artist_ids = models.CharField(max_length=255, blank=True, null=True)
 
+    def calculate_mana_cost(self):
+        mana_counter = cf.calculate_card_mana_cost(self.mana_cost)
+        return mana_counter
     class Meta:
         managed = False
         db_table = 'cards'

@@ -41,6 +41,20 @@ def calculate_mana_counter(card_array):
 
     return dictionary_list
 
+def calculate_card_mana_cost(mana_cost):
+    if mana_cost == None or mana_cost == '':
+        return ''
+
+    pattern = r'\{(.*?)\}'
+    matches = re.finditer(pattern, mana_cost)
+    dictionary_list = []
+    for matchNum, match in enumerate(matches):
+        for groupNum in range(0, len(match.groups())):
+            dictionary_list = search_dict_in_array(dictionary_list, match.group(1))
+    return  dictionary_list
+
+
+
 def add_mana_counter_to_global_counter(card_list):
     pattern = r'\{(.*?)\}'
     global_deck_counter = []

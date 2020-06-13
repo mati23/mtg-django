@@ -141,6 +141,9 @@ class CardDetailView(generics.ListAPIView):
 
     def get(self, request, pk):
         card = model_to_dict(Cards.objects.get(id=pk))
+        mana_counter = Cards.objects.get(id=pk).calculate_mana_cost()
+        card['mana_counter']= json.dumps(mana_counter)
+        print(card)
         return Response(card)
 
 
