@@ -38,8 +38,8 @@ function DeckList() {
         history.push('/deck/' + id + '/', { id: id })
     }
     useEffect(() => {
-        if (sessionStorage.getItem("userId") != null) {
-            axios.post('http://127.0.0.1:8001/deck-list/', { userId: sessionStorage.getItem("userId") }).then(
+        if (sessionStorage.getItem("token") != null) {
+            axios.post('http://127.0.0.1:8001/deck-list/', { userId: sessionStorage.getItem("userId") }, { headers: { "token": sessionStorage.getItem("token") } }).then(
                 data => {
                     console.log(data)
                     data.data.response.map((item) => {

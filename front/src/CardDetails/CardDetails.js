@@ -108,7 +108,7 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
                         disabled={cardQuantity > 0 ? false : true}
                         onClick={(event, value) => saveCardIntoDeck(event, cardObject)}>SAVE</Button>
                 </div>
-                <i class="fa fa-bars"></i>
+                <i className="fa fa-bars"></i>
             </div>
         </div>
     );

@@ -15,6 +15,16 @@ import base64
 from django.forms.models import model_to_dict
 from datetime import datetime
 
+def validate_token(token):
+    try:
+        auth_token = AuthToken.objects.get(key=token)
+        user = AuthUser.objects.get(id=auth_token.user_id)
+        if(user != None):
+            return True
+    except :
+        return False
+
+
 def create(request):
     if(request.method == 'POST'):
         cardObject = json.loads(request.body.decode("UTF-8"))
@@ -70,10 +80,10 @@ def login_user(request):
             user = AuthUser.objects.get(username=user_info.get('username'))
             response = "login failed"
             if(user!=None and user.password == user_info["password"]):
-                user.token = cf.generate_token()
+                auth_token = AuthToken.objects.get(user=user.id)
                 user.save()
                 response= "success"
-            return JsonResponse({"response": response, "token":user.token, "userId":user.id, "username":user.username})
+            return JsonResponse({"response": response, "token":auth_token.key, "userId":user.id, "username":user.username})
         except:
             return JsonResponse({"response": str(NameError)})
 
@@ -93,22 +103,25 @@ def register_user(request):
             user.is_staff = 0
             user.date_joined = datetime.today()
             user.save()
-
             token = AuthToken()
             token.save_token(user)
             token.save()
             print(token.key)
             response = "success"
-        return JsonResponse({"response": response})
+        return JsonResponse({"response": response, "token":token.key,"username":user.username,"userId":user.id})
 
 def get_deck_by_user(request):
     if request.method == 'POST':
         request_info = json.loads(request.body.decode("UTF-8"))
+        token = request.headers.get('token')
         decks = []
-        for deck in Decks.objects.filter(user=int(request_info.get("userId"))):
-            decks.append(deck.toJson())
 
-        return JsonResponse({"response": decks})
+        if(validate_token(token)):
+            for deck in Decks.objects.filter(user=int(request_info.get("userId"))):
+                decks.append(deck.toJson())
+            return JsonResponse({"response": decks})
+        else:
+            return JsonResponse({"response": "no token"})
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

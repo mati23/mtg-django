@@ -74,7 +74,10 @@ export default function Authentication() {
     useEffect(() => {
         if (registrationForm.username != "" && registrationForm.password != "" && registrationForm.passwordConfirmation != "" && registrationForm.email != "") {
             let response = axios.post("http://127.0.0.1:8001/auth/register_user/", registrationForm).then(result => {
-
+                window.sessionStorage.setItem('username', result.data.username)
+                window.sessionStorage.setItem('token', result.data.token)
+                window.sessionStorage.setItem('userId', result.data.userId)
+                history.push('/')
             })
         }
     }, [registrationForm])
@@ -102,7 +105,7 @@ export default function Authentication() {
         <div className="authentication">
             <Dialog className="authentication-dialog" onBackdropClick={closeDialog} aria-labelledby="customized-dialog-title" open={dialog}>
                 <div className="dialog-container">
-                    <div className="icon-container"><i class="fas fa-id-card-alt create-account"></i></div>
+                    <div className="icon-container"><i className="fas fa-id-card-alt create-account"></i></div>
                     <div className="dialog-message">
                         {location.state}
                     </div>

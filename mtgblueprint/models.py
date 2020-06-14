@@ -129,13 +129,13 @@ class DjangoSite(models.Model):
         app_label = ''
 
 class AuthToken(models.Model):
-    key = models.CharField(unique=True, max_length=40)
+    key = models.CharField(unique=True, max_length=40,primary_key=True)
     created = models.DateField(default=datetime.date.today)
     user = models.ForeignKey(AuthUser,models.DO_NOTHING)
 
 
     def save_token(self,user):
-        self.key = secrets.token_urlsafe(16)
+        self.key = secrets.token_urlsafe(30)
         self.user = user
 
     class Meta:
