@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets, generics, filters
-from mtgblueprint.models import Decks
+from mtgblueprint.models import Decks, AuthToken
 from mtgblueprint.model.Cards import Cards
 from mtgblueprint.model.AuthUser import AuthUser
 from .serializers import CardSerializer, UserSerializer, CardDetailSerializer, DeckListSerializer, DeckCrudSerializer
@@ -14,7 +14,6 @@ from random import choice
 import base64
 from django.forms.models import model_to_dict
 from datetime import datetime
-
 
 def create(request):
     if(request.method == 'POST'):
@@ -79,6 +78,7 @@ def login_user(request):
             return JsonResponse({"response": str(NameError)})
 
 
+
 def register_user(request):
     if(request.method == 'POST'):
         user_info = json.loads(request.body.decode("UTF-8"))
@@ -86,13 +86,18 @@ def register_user(request):
         response = "fail"
         if(user != None):
             user = AuthUser()
-            user.password = "reverse"
+            user.password = user_info["password"]
             user.email = user_info["email"]
             user.username = user_info["username"]
             user.is_active = 1
             user.is_staff = 0
             user.date_joined = datetime.today()
             user.save()
+
+            token = AuthToken()
+            token.save_token(user)
+            token.save()
+            print(token.key)
             response = "success"
         return JsonResponse({"response": response})
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class AuthUser(models.Model):
     password = models.CharField(max_length=128)
@@ -14,6 +15,6 @@ class AuthUser(models.Model):
     token = models.CharField(max_length=255)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'auth_user'
         app_label = 'auth_user'

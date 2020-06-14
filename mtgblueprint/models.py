@@ -11,6 +11,14 @@ import re
 import mtgblueprint.constants as c
 import mtgblueprint.customfunctions as cf
 from mtgblueprint.model.AuthUser import AuthUser
+import secrets
+import datetime
+
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
 
 
 class Decks(models.Model):
@@ -119,3 +127,18 @@ class DjangoSite(models.Model):
         managed = False
         db_table = 'django_site'
         app_label = ''
+
+class AuthToken(models.Model):
+    key = models.CharField(unique=True, max_length=40)
+    created = models.DateField(default=datetime.date.today)
+    user = models.ForeignKey(AuthUser,models.DO_NOTHING)
+
+
+    def save_token(self,user):
+        self.key = secrets.token_urlsafe(16)
+        self.user = user
+
+    class Meta:
+        managed=False
+        db_table='authtoken_token'
+        app_label='authtoken_token'
