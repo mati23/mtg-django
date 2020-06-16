@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input, TextField, Card, CardContent, Typography, CardActionArea, CardActions } from '@material-ui/core';
+import { Button, Input, TextField, Card, CardContent, Typography, CardActionArea, CardActions, CardMedia } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios'
 import { useState, useEffect } from 'react';
@@ -43,20 +43,30 @@ function DeckList() {
                 data => {
                     console.log(data)
                     data.data.response.map((item) => {
-                        item = JSON.parse(item)
+                        let thumbnail = (item.thumbnail)
+                        console.log(thumbnail)
+                        item = JSON.parse(item.deck)
                         setDecks(decks => [...decks,
                         <Card className="card-container" key={item.id}>
-                            < CardContent >
-                                <Typography variant="h4" className="" color="textSecondary">
-                                    {item.deck_description}
-                                </Typography>
-                                <div className="deck-thumbnail">
+                            <CardActionArea>
+                                < CardContent >
+                                    <CardMedia
+                                        component="img"
+                                        alt="Contemplative Reptile"
+                                        height="100"
+                                        image={"data:image/jpg;base64, " + thumbnail}
+                                        title="Contemplative Reptile"
+                                    />
+                                    <Typography variant="h4" className="" style={{ fontWeight: '300' }} color="textSecondary">
+                                        {item.deck_description}
+                                    </Typography>
 
-                                </div>
-                                <Typography className="" color="textSecondary">
-                                    Colors
+                                    <Typography className="" color="textSecondary">
+                                        Colors
                                 </Typography>
-                            </CardContent >
+                                </CardContent >
+                            </CardActionArea>
+
                             <CardActions>
                                 <Button className="open-deck-button" onClick={() => openCardDetails(item.id)}>Open Deck</Button>
                             </CardActions>
@@ -72,11 +82,15 @@ function DeckList() {
         }
     }, [])
 
+    const registerDeck = () => {
+        history.push({ pathname: '/deck/' })
+    }
+
     return (
         <div className="grid-container">
             <div className="deck-container-title">Decks</div>
             <div className="deck-add-new">
-                <Button color="primary" variant="contained">Adicionar</Button>
+                <Button onClick={registerDeck} color="primary" variant="contained">Adicionar</Button>
             </div>
             {decks}
         </div>

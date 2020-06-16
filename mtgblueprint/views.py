@@ -14,6 +14,7 @@ from random import choice
 import base64
 from django.forms.models import model_to_dict
 from datetime import datetime
+import mtgblueprint.constants as c
 
 def validate_token(token):
     try:
@@ -23,6 +24,16 @@ def validate_token(token):
             return True
     except :
         return False
+
+def get_image_thumbnail(image_path):
+    path = c.root_path+'assets/'
+    with open(path+image_path,"rb") as image:
+        encoded_image = base64.b64encode(image.read())
+        return encoded_image
+
+
+
+
 
 
 def create(request):
@@ -118,7 +129,10 @@ def get_deck_by_user(request):
 
         if(validate_token(token)):
             for deck in Decks.objects.filter(user=int(request_info.get("userId"))):
-                decks.append(deck.toJson())
+                image = ""
+                if(deck.image != None):
+                    image = get_image_thumbnail(deck.image+'.jpg')
+                decks.append({"deck":deck.toJson(), "thumbnail":str(image, "utf-8")})
             return JsonResponse({"response": decks})
         else:
             return JsonResponse({"response": "no token"})

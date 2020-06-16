@@ -29,7 +29,7 @@ class Decks(models.Model):
     created_at = models.DateField()
     updated_at = models.DateField()
     title = models.TextField()
-    image = models.TextField()
+    image = models.CharField(max_length=30)
 
     def getCardList(self):
         return self.card_list
