@@ -30,6 +30,7 @@ function App() {
       <Route path="/card/:id" component={CardDetails}></Route>
       <Route path="/deck-list" component={DeckList}></Route>
       <Route path="/deck/:id" component={DeckDetails}></Route>
+      <Route path="/deck" exact component={DeckDetails}></Route>
 
     </Router>
   );

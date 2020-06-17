@@ -66,3 +66,45 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#242424', end
 .centralized-container{
     margin: 10em;
 }
+.new-deck-container{
+    background-color: #aaa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2em; 
+}
+.deck-name-container{
+    background-color: #bbb;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.deck-name-container input{
+    font-size: 4em;
+}
+.deck-avatar-container{
+    margin: 1em;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+}
+.avatar-thumbnails-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.avatar-thumbnail{
+    width: 15%;
+    
+    margin: 1em;
+
+}
+.avatar-thumbnail img{
+    border-radius: 5px;
+}
+.shadowed-div{
+    -webkit-box-shadow: 36px 28px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 36px 28px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 36px 28px 5px 0px rgba(0,0,0,0.75);
+}

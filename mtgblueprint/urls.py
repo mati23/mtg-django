@@ -37,6 +37,7 @@ urlpatterns = [
     url( '^auth/register_user/$', csrf_exempt(views.register_user)),
     url(r'^deck/save_changes', csrf_exempt(views.save_changes)),
     url(r'^deck/deck_mana', csrf_exempt(views.count_deck_mana)),
+url(r'^avatar-image-list/$',csrf_exempt( views.avatar_image_list)),
     url(r'^cards/(?P<name>.+)/$', CardsListView.as_view()),
     url(r'^card/(?P<pk>.+)/$', CardDetailView.as_view()),
     url(r'^deck/(?P<pk>.+)/$', DeckDetailView.as_view()),

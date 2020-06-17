@@ -24,6 +24,9 @@ function DeckDetails() {
     const [manaCount, setManaCount] = useState([])
     const [graphColors, setGraphColors] = useState([])
 
+    const [selectedAvatar, setSelectedAvatar] = useState("")
+    const [avatarList, setAvatarList] = useState([])
+
     let cardArray = []
 
     const [deckListHasChanged, setDeckListHasChanged] = useState(true)
@@ -62,7 +65,10 @@ function DeckDetails() {
         return color
     }
     useEffect(() => {
-        getDeckManaCount()
+        if (params.id !== undefined) {
+            getDeckManaCount()
+        }
+
 
     }, [])
 
@@ -161,7 +167,10 @@ function DeckDetails() {
 
 
     useEffect(() => {
-        updateDeckInfo()
+        if (params.id !== undefined) {
+            updateDeckInfo()
+        }
+
     }, [])
 
     useEffect(() => {
@@ -195,72 +204,108 @@ function DeckDetails() {
         })
     }
 
-
-
-
-
-
-    return (
-
-        <div className="deck-detail-container">
-            <div className="centralized-container">
-                <CardSearcher deckId={params.id} openDialog={(new_message) => openDialog(new_message)}></CardSearcher>
-                <div className="deck-title">{deck.title}</div>
-                <div className="description-container">
-                    <div className="description-text">"{deck.deck_description}"</div>
-                    <div className="description-container-right">{updatableCardHasChanges == false ? "" : <Fade in={updatableCardHasChanges}><Button color="primary" variant="contained" onClick={saveChanges}>SAVE CHANGES</Button></Fade>}</div>
+    const inputProps = {
+        fontSize: 50,
+    }
+    const setActiveAvatar = (event) => {
+        setActiveAvatar(event.target.id)
+    }
+    useEffect(() => {
+        let response = axios.get("http://127.0.0.1:8001/avatar-image-list/").then(result => {
+            console.log(result.data.response)
+            result.data.response.map((avatar, index) => {
+                setAvatarList(avatarList => [...avatarList,
+                <div id={index} className={this.id === selectedAvatar ? "avatar-thumbnail shadowed-div" : "avatar-thumbnail"} onClick={(e) => setActiveAvatar(e)}>
+                    <img src={"data:image/jpg;base64, " + avatar.image}></img>
                 </div>
-                <div className="deck-thumbnails">
-                    <CardInformationContainerContextProvider>
-                        {cardList}
-                    </CardInformationContainerContextProvider>
+                ])
+            })
+        })
+    }, [])
+
+    useEffect(() => {
+        console.log(avatarList)
+    }, [avatarList])
+
+
+
+    if (params.id !== undefined) {
+        return (
+            <div className="deck-detail-container">
+                <div className="centralized-container">
+                    <CardSearcher deckId={params.id} openDialog={(new_message) => openDialog(new_message)}></CardSearcher>
+                    <div className="deck-title">{deck.title}</div>
+                    <div className="description-container">
+                        <div className="description-text">"{deck.deck_description}"</div>
+                        <div className="description-container-right">{updatableCardHasChanges == false ? "" : <Fade in={updatableCardHasChanges}><Button color="primary" variant="contained" onClick={saveChanges}>SAVE CHANGES</Button></Fade>}</div>
+                    </div>
+                    <div className="deck-thumbnails">
+                        <CardInformationContainerContextProvider>
+                            {cardList}
+                        </CardInformationContainerContextProvider>
+                    </div>
                 </div>
-            </div>
-            <div className="chart-container">
-                <ReactEcharts
-                    option={{
-                        title: {
-                            text: 'Overall Statistics',
-                            textStyle: {
-                                color: "#fff",
-                                fontWeight: 'normal',
-                                fontSize: 56,
-                                align: 'center'
+                <div className="chart-container">
+                    <ReactEcharts
+                        option={{
+                            title: {
+                                text: 'Overall Statistics',
+                                textStyle: {
+                                    color: "#fff",
+                                    fontWeight: 'normal',
+                                    fontSize: 56,
+                                    align: 'center'
+                                },
+                                left: 200
+
                             },
-                            left: 200
-
-                        },
-                        tooltip: {},
-                        series: [{
-                            type: 'pie',
-                            radius: '70%',
-                            center: ['50%', '50%'],
-                            color: graphColors,
-                            data: manaCount,
-                            roseType: 'radius',
-                            animationType: 'scale',
-                            animationEasing: 'elasticOut',
-                            animationDelay: function (idx) {
-                                return Math.random() * 200;
-                            }
-                        }]
-                    }}
-                    style={{ height: '500px', width: '100%' }}
-                ></ReactEcharts>
-            </div>
-            <Dialog onClose={closeDialog} aria-labelledby="customized-dialog-title" open={dialog.visibility}>
-                <div className="dialog-container">
-                    <div className="icon-container">
-                        <i className={dialog.message == "SUCCESS" ? "fas fa-check dialog-icon green" : "fas fa-times dialog-icon red"}></i>
+                            tooltip: {},
+                            series: [{
+                                type: 'pie',
+                                radius: '70%',
+                                center: ['50%', '50%'],
+                                color: graphColors,
+                                data: manaCount,
+                                roseType: 'radius',
+                                animationType: 'scale',
+                                animationEasing: 'elasticOut',
+                                animationDelay: function (idx) {
+                                    return Math.random() * 200;
+                                }
+                            }]
+                        }}
+                        style={{ height: '500px', width: '100%' }}
+                    ></ReactEcharts>
+                </div>
+                <Dialog onClose={closeDialog} aria-labelledby="customized-dialog-title" open={dialog.visibility}>
+                    <div className="dialog-container">
+                        <div className="icon-container">
+                            <i className={dialog.message == "SUCCESS" ? "fas fa-check dialog-icon green" : "fas fa-times dialog-icon red"}></i>
+                        </div>
+                        <div className="dialog-message">
+                            {dialog.message}
+                        </div>
                     </div>
-                    <div className="dialog-message">
-                        {dialog.message}
+                </Dialog>
+            </div >
+        )
+    } else {
+        return (
+            <div className="new-deck-container">
+                <div className="deck-name-container">
+                    <div style={{ fontWeight: '400', fontSize: '2.5em', textAlign: 'center' }}>What's the name of your new awesome deck?</div>
+                    <TextField style={{ padding: '2em 10em' }} id="deck-name-input" label=" " defaultValue="" />
+                </div>
+                <div className="deck-avatar-container">
+                    <div style={{ fontWeight: '400', fontSize: '2.5em', textAlign: 'center' }}>Choose a picture that most match with your deck personality</div>
+                    <div className="avatar-thumbnails-container">
+                        {avatarList}
                     </div>
                 </div>
-            </Dialog>
-        </div >
+            </div>
+        )
+    }
 
-    )
 }
 export default DeckDetails;
 

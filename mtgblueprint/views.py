@@ -9,7 +9,7 @@ from rest_framework.response import Response
 import json
 from django.http import JsonResponse
 import mtgblueprint.customfunctions as cf
-import os
+import os, glob
 from random import choice
 import base64
 from django.forms.models import model_to_dict
@@ -30,11 +30,6 @@ def get_image_thumbnail(image_path):
     with open(path+image_path,"rb") as image:
         encoded_image = base64.b64encode(image.read())
         return encoded_image
-
-
-
-
-
 
 def create(request):
     if(request.method == 'POST'):
@@ -136,6 +131,17 @@ def get_deck_by_user(request):
             return JsonResponse({"response": decks})
         else:
             return JsonResponse({"response": "no token"})
+
+def  avatar_image_list(request):
+    if request.method=='GET':
+        path = c.root_path + 'assets/min/'
+        images = []
+        for file in os.listdir(path):
+            with open(path+file, "rb") as image:
+                encoded_image = base64.b64encode(image.read())
+                images.append({"image":str(encoded_image, "utf-8")})
+        return JsonResponse({"response": images})
+    return JsonResponse({"response": "error"})
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
