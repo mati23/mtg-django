@@ -6,10 +6,11 @@ import { useParams } from 'react-router-dom';
 import { useSpring, animated } from 'react-spring'
 import './deck-details.css'
 import CardSearcher from '../CardSearcher/CardSearcher';
-import Context, { ContextProvider, CardInformationContainerContext } from '../Context/Context';
+import Context, { ContextProvider, CardInformationContainerContext, AvatarThumbnailContextProvider } from '../Context/Context';
 import { CardThumbNail } from '../CardThumbnail/CardThumbnail';
 import ReactEcharts from "echarts-for-react";
 import CardInformationContainerContextProvider from '../Context/Context';
+import AvatarThumbnail from '../AvatarThumbnail/AvatarThumbnail';
 
 
 
@@ -23,6 +24,7 @@ function DeckDetails() {
     const [newCardArray, setNewCardArray] = useState([])
     const [manaCount, setManaCount] = useState([])
     const [graphColors, setGraphColors] = useState([])
+    const [updateStyle, setUpdateStyle] = useState("avatar-thumbnail")
 
     const [selectedAvatar, setSelectedAvatar] = useState("")
     const [avatarList, setAvatarList] = useState([])
@@ -207,25 +209,29 @@ function DeckDetails() {
     const inputProps = {
         fontSize: 50,
     }
-    const setActiveAvatar = (event) => {
-        setActiveAvatar(event.target.id)
-    }
+
+    const updateGrid = useCallback((event) => {
+        console.log(event)
+        setUpdateStyle(event)
+    }, [])
     useEffect(() => {
         let response = axios.get("http://127.0.0.1:8001/avatar-image-list/").then(result => {
-            console.log(result.data.response)
             result.data.response.map((avatar, index) => {
                 setAvatarList(avatarList => [...avatarList,
-                <div id={index} className={this.id === selectedAvatar ? "avatar-thumbnail shadowed-div" : "avatar-thumbnail"} onClick={(e) => setActiveAvatar(e)}>
-                    <img src={"data:image/jpg;base64, " + avatar.image}></img>
-                </div>
+                <AvatarThumbnail index={index} avatar={avatar} updateStyle={updateStyle} updateGrid={updateGrid}>
+
+                </AvatarThumbnail>
                 ])
             })
         })
     }, [])
 
     useEffect(() => {
-        console.log(avatarList)
+
     }, [avatarList])
+    const saveDeck = () => {
+
+    }
 
 
 
@@ -299,8 +305,14 @@ function DeckDetails() {
                 <div className="deck-avatar-container">
                     <div style={{ fontWeight: '400', fontSize: '2.5em', textAlign: 'center' }}>Choose a picture that most match with your deck personality</div>
                     <div className="avatar-thumbnails-container">
-                        {avatarList}
+                        <AvatarThumbnailContextProvider>
+                            {avatarList}
+                        </AvatarThumbnailContextProvider>
+
                     </div>
+                </div>
+                <div className="save-button-container">
+                    <Button size="large" color="primary" variant="contained" onClick={saveDeck}>SAVE DECK</Button>
                 </div>
             </div>
         )

@@ -67,14 +67,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#242424', end
     margin: 10em;
 }
 .new-deck-container{
-    background-color: #aaa;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 2em; 
 }
 .deck-name-container{
-    background-color: #bbb;    
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,7 +84,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#242424', end
 }
 .deck-avatar-container{
     margin: 1em;
-    background-color: lightblue;
+    background-color: white;
     display: flex;
     flex-direction: column;
 }
@@ -96,15 +96,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#242424', end
 }
 .avatar-thumbnail{
     width: 15%;
-    
+    display: flex;
     margin: 1em;
+    background-color: transparent;
+
+    border-radius: 5px;
 
 }
 .avatar-thumbnail img{
     border-radius: 5px;
+    background-color: transparent;
+    
 }
 .shadowed-div{
     -webkit-box-shadow: 36px 28px 5px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 36px 28px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 36px 28px 5px 0px rgba(0,0,0,0.75);
+}
+.save-button-container{
+    display: flex;
+    justify-content: center;
+    margin: 10em 0;
 }
