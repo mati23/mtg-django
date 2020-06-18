@@ -23,6 +23,7 @@ export default function AvatarThumbnail({ index, avatar, updateStyle, updateGrid
     const setActiveAvatar = (event) => {
         setAvatarIndex(parseInt(event.target.id))
         setAvatarSelected(parseInt(event.target.id))
+        updateGrid(true)
     }
 
     useEffect(() => {

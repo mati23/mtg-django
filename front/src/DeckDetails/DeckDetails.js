@@ -24,7 +24,7 @@ function DeckDetails() {
     const [newCardArray, setNewCardArray] = useState([])
     const [manaCount, setManaCount] = useState([])
     const [graphColors, setGraphColors] = useState([])
-    const [updateStyle, setUpdateStyle] = useState("avatar-thumbnail")
+    const [updateStyle, setUpdateStyle] = useState(false)
 
     const [selectedAvatar, setSelectedAvatar] = useState("")
     const [avatarList, setAvatarList] = useState([])
@@ -213,12 +213,13 @@ function DeckDetails() {
     const updateGrid = useCallback((event) => {
         console.log(event)
         setUpdateStyle(event)
+
     }, [])
     useEffect(() => {
         let response = axios.get("http://127.0.0.1:8001/avatar-image-list/").then(result => {
             result.data.response.map((avatar, index) => {
                 setAvatarList(avatarList => [...avatarList,
-                <AvatarThumbnail index={index} avatar={avatar} updateStyle={updateStyle} updateGrid={updateGrid}>
+                <AvatarThumbnail index={index} avatar={avatar} updateGrid={updateGrid}>
 
                 </AvatarThumbnail>
                 ])
@@ -312,7 +313,7 @@ function DeckDetails() {
                     </div>
                 </div>
                 <div className="save-button-container">
-                    <Button size="large" color="primary" variant="contained" onClick={saveDeck}>SAVE DECK</Button>
+                    <Button size="large" disabled={!updateStyle} color="primary" variant="contained" onClick={saveDeck}>SAVE DECK</Button>
                 </div>
             </div>
         )
