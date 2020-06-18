@@ -143,6 +143,23 @@ def  avatar_image_list(request):
         return JsonResponse({"response": images})
     return JsonResponse({"response": "error"})
 
+def create_new_deck(request):
+    if request.method =='POST':
+        body = json.loads(request.body.decode("utf-8"))
+        deck_name = body["deck_name"]
+        deck_avatar_id = body["deck_avatar"]
+        auth_token = AuthToken.objects.get( key = request.headers.get('token'))
+        if(auth_token.key):
+            user = AuthUser.objects.get(id=auth_token.user_id)
+            deck = Decks()
+            deck.user_id = user.id
+            deck.title = deck_name
+            deck.image = "avatar" + str(deck_avatar_id)
+            deck.save()
+            return JsonResponse({"response":"success"})
+    else:
+        return JsonResponse({"response":"error"})
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer

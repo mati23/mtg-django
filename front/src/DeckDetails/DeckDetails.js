@@ -24,7 +24,7 @@ function DeckDetails() {
     const [newCardArray, setNewCardArray] = useState([])
     const [manaCount, setManaCount] = useState([])
     const [graphColors, setGraphColors] = useState([])
-    const [updateStyle, setUpdateStyle] = useState(false)
+    const [deckName, setDeckName] = useState("")
 
     const [selectedAvatar, setSelectedAvatar] = useState("")
     const [avatarList, setAvatarList] = useState([])
@@ -212,7 +212,7 @@ function DeckDetails() {
 
     const updateGrid = useCallback((event) => {
         console.log(event)
-        setUpdateStyle(event)
+        setSelectedAvatar(event)
 
     }, [])
     useEffect(() => {
@@ -231,6 +231,10 @@ function DeckDetails() {
 
     }, [avatarList])
     const saveDeck = () => {
+        if (deckName.length > 0) {
+            let response = axios.post("http://127.0.0.1:8001/create_new_deck/", { deck_name: deckName, deck_avatar: selectedAvatar }, { headers: { "token": sessionStorage.getItem("token") } }).then(result => { console.log(result) })
+        }
+
 
     }
 
@@ -301,7 +305,7 @@ function DeckDetails() {
             <div className="new-deck-container">
                 <div className="deck-name-container">
                     <div style={{ fontWeight: '400', fontSize: '2.5em', textAlign: 'center' }}>What's the name of your new awesome deck?</div>
-                    <TextField style={{ padding: '2em 10em' }} id="deck-name-input" label=" " defaultValue="" />
+                    <TextField style={{ padding: '2em 10em' }} onChange={(event) => setDeckName(event.target.value)} id="deck-name-input" label=" " defaultValue="" />
                 </div>
                 <div className="deck-avatar-container">
                     <div style={{ fontWeight: '400', fontSize: '2.5em', textAlign: 'center' }}>Choose a picture that most match with your deck personality</div>
@@ -313,7 +317,7 @@ function DeckDetails() {
                     </div>
                 </div>
                 <div className="save-button-container">
-                    <Button size="large" disabled={!updateStyle} color="primary" variant="contained" onClick={saveDeck}>SAVE DECK</Button>
+                    <Button size="large" disabled={selectedAvatar !== "" ? false : true} color="primary" variant="contained" onClick={saveDeck}>SAVE DECK</Button>
                 </div>
             </div>
         )

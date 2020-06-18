@@ -58,7 +58,7 @@ function DeckList() {
                                         title="Contemplative Reptile"
                                     />
                                     <Typography variant="h4" className="" style={{ fontWeight: '300' }} color="textSecondary">
-                                        {item.deck_description}
+                                        {item.title}
                                     </Typography>
 
                                     <Typography className="" color="textSecondary">
