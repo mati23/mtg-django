@@ -84,7 +84,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#242424', end
 }
 .deck-avatar-container{
     margin: 1em;
-    background-color: white;
     display: flex;
     flex-direction: column;
 }

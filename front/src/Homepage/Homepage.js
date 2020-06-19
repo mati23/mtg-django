@@ -87,7 +87,7 @@ function Homepage() {
         return color
     }
     return (
-        <div>
+        <div className="dark-theme">
             <div className="chart-container">
                 <ReactEcharts
                     option={{
@@ -137,7 +137,6 @@ function Homepage() {
                                 { name: 'Blue', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: '#41b7cc' },
                                 { name: 'Black', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: '#222' },
                                 { name: 'White', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: '#d5d5d5' },
-                                { name: 'Non-Color', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: '#B5BFD9' }
                             ],
 
                             shape: 'circle'

@@ -154,6 +154,7 @@ function DeckDetails() {
         }
     }
 
+
     let params = useParams()
 
     const updateDeckInfo = () => {
@@ -232,7 +233,16 @@ function DeckDetails() {
     }, [avatarList])
     const saveDeck = () => {
         if (deckName.length > 0) {
-            let response = axios.post("http://127.0.0.1:8001/create_new_deck/", { deck_name: deckName, deck_avatar: selectedAvatar }, { headers: { "token": sessionStorage.getItem("token") } }).then(result => { console.log(result) })
+            let response = axios.post("http://127.0.0.1:8001/create_new_deck/",
+                { deck_name: deckName, deck_avatar: selectedAvatar },
+                { headers: { "token": sessionStorage.getItem("token") } })
+                .then(result => {
+                    if (result.data.response === "success") {
+                        openDialog("SUCCESS")
+                    } else {
+                        openDialog(result.data.response + "\n please contact administrator")
+                    }
+                })
         }
 
 
@@ -242,7 +252,7 @@ function DeckDetails() {
 
     if (params.id !== undefined) {
         return (
-            <div className="deck-detail-container">
+            <div className="deck-detail-container dark-theme">
                 <div className="centralized-container">
                     <CardSearcher deckId={params.id} openDialog={(new_message) => openDialog(new_message)}></CardSearcher>
                     <div className="deck-title">{deck.title}</div>
@@ -302,7 +312,7 @@ function DeckDetails() {
         )
     } else {
         return (
-            <div className="new-deck-container">
+            <div className="new-deck-container dark-theme">
                 <div className="deck-name-container">
                     <div style={{ fontWeight: '400', fontSize: '2.5em', textAlign: 'center' }}>What's the name of your new awesome deck?</div>
                     <TextField style={{ padding: '2em 10em' }} onChange={(event) => setDeckName(event.target.value)} id="deck-name-input" label=" " defaultValue="" />
@@ -317,8 +327,18 @@ function DeckDetails() {
                     </div>
                 </div>
                 <div className="save-button-container">
-                    <Button size="large" disabled={selectedAvatar !== "" ? false : true} color="primary" variant="contained" onClick={saveDeck}>SAVE DECK</Button>
+                    <Button style={selectedAvatar !== "" ? { background: "#E74D11", color: 'white' } : {}} size="large" disabled={selectedAvatar !== "" ? false : true} variant="contained" onClick={saveDeck}>SAVE DECK</Button>
                 </div>
+                <Dialog onClose={() => setDialog({ visibility: false })} aria-labelledby="customized-dialog-title" open={dialog.visibility}>
+                    <div className="dialog-container">
+                        <div className="icon-container">
+                            <i className={dialog.message == "SUCCESS" ? "fas fa-check dialog-icon green" : "fas fa-times dialog-icon red"}></i>
+                        </div>
+                        <div className="dialog-message">
+                            {dialog.message}
+                        </div>
+                    </div>
+                </Dialog>
             </div>
         )
     }

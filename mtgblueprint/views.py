@@ -63,8 +63,9 @@ def calculate_all_mana_decks(request):
         deck_list = []
         decks = Decks.objects.all()
         for index in decks:
-            for object in json.loads(index.card_list):
-                deck_list.append(object)
+            if(index.card_list != None):
+                for object in json.loads(index.card_list):
+                    deck_list.append(object)
         global_deck_counter = cf.add_mana_counter_to_global_counter(deck_list)
 
     return JsonResponse({"response": global_deck_counter})

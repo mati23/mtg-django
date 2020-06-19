@@ -87,7 +87,7 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
     }
 
     return (
-        <div style={{ display: cardVisibility.visibility }} >
+        <div className="dark-theme" style={{ display: cardVisibility.visibility }} >
             <div className="card-details">
                 <div className="card-thumbnail-container">
                     <animated.div className="card"
@@ -99,9 +99,9 @@ const CardDetails = ({ updateList, deckId, selectedCardId, newCardVisibility, pr
                     </animated.div>
                 </div>
                 <div className="card-action-buttons">
-                    <Button onClick={decreaseCounter} className="action-button" style={{ background: "#F03A5F" }}>Remove</Button>
-                    <Chip label={cardQuantity}></Chip>
-                    <Button onClick={increaseCounter} className="action-button" style={{ background: "#00C4A6" }}>Add</Button>
+                    <Button onClick={decreaseCounter} className="action-button" style={{ background: "#F03A5F", color: 'white' }}>Remove</Button>
+                    <Chip label={cardQuantity} style={{ color: '#E74D11', fontWeight: 'bold' }}></Chip>
+                    <Button onClick={increaseCounter} className="action-button" style={{ background: "#00C4A6", color: 'white' }}>Add</Button>
                 </div>
                 <div className="card-action-buttons">
                     <Button className={cardQuantity > 0 ? "button-enabled" : "button-disabled"}

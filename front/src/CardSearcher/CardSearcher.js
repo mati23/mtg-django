@@ -15,6 +15,7 @@ import {
 import CardDetails from '../CardDetails/CardDetails';
 import { useEffect } from 'react';
 
+
 const CardSearcher = ({ deckId, updateList, openDialog }) => {
 
     const [cards, setCards] = useState([])
@@ -63,7 +64,7 @@ const CardSearcher = ({ deckId, updateList, openDialog }) => {
                 options={cards}
                 getOptionLabel={(options) => options.name}
                 style={{ width: '100%' }}
-                renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                renderInput={(params) => <TextField {...params} label="Search a card" variant="outlined" />}
                 onInputChange={setCardName}
                 loading={true}
                 onChange={(event, value) => { getOptionSelectedFromMenu(event, value.id) }}

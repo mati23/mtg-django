@@ -56,7 +56,7 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
     const [cardDetail, setCardDetail] = useState([])
     const [cardBlur, setCardBlur] = useState(false)
     const [cardInfoVisibility, setCardInfoVisibility] = useState(false)
-    const [props, setProps] = useSpring(() => ({ height: '0px', position: 'absolute', background: '#fafafa', margin: '1em 0', opacity: '0' }))
+    const [props, setProps] = useSpring(() => ({ height: '0px', position: 'absolute', margin: '1em 0', opacity: '0', color: "#ddd" }))
 
     const [manaTags, setManaTags] = useState([])
     const [manaCounter, setManaCounter] = useState([])
@@ -184,7 +184,7 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
                 </div>
 
             </div>
-            <animated.div className={"card-information-container"} style={props}>
+            <animated.div className={"card-information-container darker-theme"} style={props}>
 
                 <div className="card-visual">
                     <div className="card-title">

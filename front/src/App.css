@@ -17,6 +17,16 @@ body{
   font-family: 'Oswald';
   src: url('./Homepage/Oswald-VariableFont_wght.ttf') format('truetype');
 }
+.orange-theme{
+  background-color: #E74D11;
+}
+.dark-theme{
+  background-color: #363636;
+  color: #ddd;
+}
+.darker-theme{
+  background-color: #262626;
+}
 .App {
   text-align: center;
 }

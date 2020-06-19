@@ -37,7 +37,7 @@ function Navbar() {
     return (
         <div>
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar className="orange-theme">
                     <IconButton edge="start" color="inherit" aria-label="menu" href="/" style={{ fontFamily: 'Roboto-Regular' }}>
                         Mtg Blueprint
                     </IconButton>

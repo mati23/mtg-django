@@ -1,3 +1,14 @@
 .card-searcher-container{
     margin: 10em 20%;
 }
+.card-searcher-container .MuiInputBase-input{
+    color: white!important;
+    font-weight: bold!important;
+}
+.MuiFormLabel-root{
+    color: #E74D11!important;
+    font-weight: bold!important;
+}
+.MuiInputBase-root:focus{
+    border-color: #E74D11!important;
+}
