@@ -19,7 +19,7 @@ export default function Authentication() {
         password: ""
     })
     const [params, setParams] = useState("")
-    const [dialog, setDialog] = useState(true)
+    const [dialog, setDialog] = useState(false)
     const [registrationForm, setRegistrationForm] = useState({
         username: "",
         email: "",
@@ -120,23 +120,23 @@ export default function Authentication() {
             <div className="authentication-container">
                 <div className="authentication-form-container">
                     <div className="login">
-                        <div className="login-container">
-                            <h2 style={{ alignSelf: 'self-end', fontFamily: 'Roboto-Regular', fontSize: '3em' }}>Login</h2>
+                        <div className="login-container ">
+                            <h2 style={{ alignSelf: 'self-end', fontFamily: 'Roboto-Regular', fontSize: '3em', color: '#aaa' }}>Login</h2>
                             <TextField className="login_input" label="Username or Email" variant="outlined" style={{ width: "100%" }} />
                             <TextField className="login_input" label="Password" type="password" variant="outlined" style={{ width: "100%" }} />
-                            <Button onClick={login} variant="contained" color="primary" className="thin" style={{ gridRowStart: "6" }}>
+                            <Button onClick={login} variant="contained" className="thin" style={{ gridRowStart: "6", background: '#E74D11', color: '#aaa' }}>
                                 LOGIN
                             </Button>
                         </div>
                     </div>
                     <div className="registration">
                         <div className="registration-container" >
-                            <h2 style={{ alignSelf: 'self-end', fontFamily: 'Roboto-Regular', fontSize: '3em' }}>Register</h2>
+                            <h2 style={{ alignSelf: 'self-end', fontFamily: 'Roboto-Regular', fontSize: '3em', color: '#aaa' }}>Register</h2>
                             <TextField id="registration_username" className="registration_input" label="Username" variant="outlined" style={{ width: "100%" }} />
                             <TextField id="registration_email" className="registration_input" label="Email" variant="outlined" style={{ width: "100%" }} />
                             <TextField id="registration_password" className="registration_input" label="Password" variant="outlined" style={{ width: "100%" }} />
                             <TextField id="registration_confirm_password" className="registration_input" label="Confirm Password" variant="outlined" style={{ width: "100%" }} />
-                            <Button variant="contained" color="primary" className="thin" onClick={register} style={{ gridRowStart: "6" }}>
+                            <Button variant="contained" className="thin" onClick={register} style={{ gridRowStart: "6", background: '#E74D11', color: '#aaa' }}>
                                 REGISTER
                             </Button>
 

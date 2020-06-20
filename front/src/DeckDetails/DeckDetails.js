@@ -258,7 +258,7 @@ function DeckDetails() {
                     <div className="deck-title">{deck.title}</div>
                     <div className="description-container">
                         <div className="description-text">"{deck.deck_description}"</div>
-                        <div className="description-container-right">{updatableCardHasChanges == false ? "" : <Fade in={updatableCardHasChanges}><Button color="primary" variant="contained" onClick={saveChanges}>SAVE CHANGES</Button></Fade>}</div>
+                        <div className="description-container-right">{updatableCardHasChanges == false ? "" : <Fade in={updatableCardHasChanges}><Button style={{ background: '#E74D11', color: 'white' }} variant="contained" onClick={saveChanges}>SAVE CHANGES</Button></Fade>}</div>
                     </div>
                     <div className="deck-thumbnails">
                         <CardInformationContainerContextProvider>

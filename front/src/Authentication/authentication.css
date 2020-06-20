@@ -29,7 +29,7 @@ body::-webkit-scrollbar {
     -webkit-box-shadow: 10px 10px 24px 0px rgba(0,0,0,0.30);
     -moz-box-shadow: 10px 10px 24px 0px rgba(0,0,0,0.30);
     box-shadow: 10px 10px 24px 0px rgba(0,0,0,0.30);
-    background: rgba(255,255,255,0.6);
+    background: rgba(0,0,0,0.8);
     z-index: 99990;
     align-items: center;
     display: grid;
@@ -52,7 +52,7 @@ body::-webkit-scrollbar {
     font-weight: 500!important;
 }
 .color-overlay{    
-    background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 20%,rgba(255,255,255,0.5) 35%, rgba(166,23,38,0) 100%);
+    background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 20%,rgba(200,200,200,0.5) 35%,rgba(0,0,0,0.9) 80%, rgba(0,0,0,0.95) 90%);
     z-index: 9;
     position: fixed;
     width: 100%;

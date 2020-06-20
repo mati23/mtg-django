@@ -8,3 +8,6 @@
 .user-name{
     font-family: 'Roboto-Bold';
 }
+.MuiPopover-paper{
+    color: white!important;
+}

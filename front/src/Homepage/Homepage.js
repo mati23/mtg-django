@@ -132,11 +132,11 @@ function Homepage() {
                                 }
                             },
                             indicator: [
-                                { name: 'Red', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: '#F24B5C' },
-                                { name: 'Green', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: '#6BB073' },
-                                { name: 'Blue', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: '#41b7cc' },
-                                { name: 'Black', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: '#222' },
-                                { name: 'White', max: smallestNumber + Math.ceil(smallestNumber * 0.1), color: '#d5d5d5' },
+                                { name: 'Red', max: smallestNumber + Math.ceil(smallestNumber * 0.5), color: '#F24B5C' },
+                                { name: 'Green', max: smallestNumber + Math.ceil(smallestNumber * 0.5), color: '#6BB073' },
+                                { name: 'Blue', max: smallestNumber + Math.ceil(smallestNumber * 0.5), color: '#41b7cc' },
+                                { name: 'Black', max: smallestNumber + Math.ceil(smallestNumber * 0.5), color: '#222' },
+                                { name: 'White', max: smallestNumber + Math.ceil(smallestNumber * 0.5), color: '#d5d5d5' },
                             ],
 
                             shape: 'circle'
