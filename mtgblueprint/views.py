@@ -67,8 +67,15 @@ def calculate_all_mana_decks(request):
                 for object in json.loads(index.card_list):
                     deck_list.append(object)
         global_deck_counter = cf.add_mana_counter_to_global_counter(deck_list)
+        image = get_homepage_image()
 
-    return JsonResponse({"response": global_deck_counter})
+    return JsonResponse({"response": global_deck_counter, "image":str(image,'utf-8')})
+
+def get_homepage_image():
+    path = c.root_path + 'assets/homepage_wallpaper/'
+    with open(path + 'wallpaper.jpg', "rb") as image:
+        encoded_image = base64.b64encode(image.read())
+        return encoded_image
 
 def set_auth_image(request):
     if(request.method=='GET'):

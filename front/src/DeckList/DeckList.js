@@ -41,10 +41,8 @@ function DeckList() {
         if (sessionStorage.getItem("token") != null) {
             axios.post('http://127.0.0.1:8001/deck-list/', { userId: sessionStorage.getItem("userId") }, { headers: { "token": sessionStorage.getItem("token") } }).then(
                 data => {
-                    console.log(data)
                     data.data.response.map((item) => {
                         let thumbnail = (item.thumbnail)
-                        console.log(thumbnail)
                         item = JSON.parse(item.deck)
                         setDecks(decks => [...decks,
                         <Card className="card-container" key={item.id}>
@@ -78,7 +76,6 @@ function DeckList() {
             ).catch(error => { console.log(error) })
         } else {
             history.push({ pathname: '/auth/', state: "You are not logged in. Please sign in or create your account." })
-            console.log("you are not logged in")
         }
     }, [])
 

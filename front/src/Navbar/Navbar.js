@@ -32,7 +32,6 @@ function Navbar() {
         window.location.reload()
     }
     useEffect(() => {
-        console.log(window.sessionStorage)
     }, [])
     return (
         <div>

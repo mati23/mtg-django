@@ -36,7 +36,6 @@ const CardSearcher = ({ deckId, updateList, openDialog }) => {
         }).catch(error => console.log(error));
     }
     const optionSelect = () => {
-        console.log('true')
     }
     const printlol = (event) => {
         return event

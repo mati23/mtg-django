@@ -6,3 +6,8 @@
     font-family: 'Roboto';
     src: url('./Roboto-Thin.ttf') format('truetype');
 }
+.welcome-div{
+ text-align: center;
+ font-size: 3em;   
+ padding: 1em 5em;
+}

@@ -27,7 +27,6 @@ export default function AvatarThumbnail({ index, avatar, updateStyle, updateGrid
     }
 
     useEffect(() => {
-        console.log(typeof avatarSelected)
         if (avatarIndex === avatarSelected) {
             setProps({ xys: calc(0, 0), boxShadow: '0px 0px 27px 25px rgba(230,100,53,1)' })
         } else {

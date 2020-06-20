@@ -158,7 +158,6 @@ function DeckDetails() {
     let params = useParams()
 
     const updateDeckInfo = () => {
-        console.log(params.id)
         axios.get("http://127.0.0.1:8001/deck/" + params.id + "/")
             .then(
                 (data) => {
@@ -212,7 +211,6 @@ function DeckDetails() {
     }
 
     const updateGrid = useCallback((event) => {
-        console.log(event)
         setSelectedAvatar(event)
 
     }, [])

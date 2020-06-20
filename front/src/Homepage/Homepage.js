@@ -17,11 +17,15 @@ var map = new HashMap()
 function Homepage() {
     const [manaCount, setManaCount] = useState([])
     const [smallestNumber, setSmallestNumber] = useState(0)
+    const [homeWallpaper, setHomeWallpaper] = useState("")
 
+    useEffect(() => {
+        console.log(homeWallpaper)
+    }, [homeWallpaper])
     const allManaCost = () => {
         const response = axios.get('http://127.0.0.1:8001/')
             .then(result => {
-                console.log(result)
+                setHomeWallpaper(result.data.image)
                 let json_result = []
                 let newManaArray = []
                 map.multi(
@@ -48,7 +52,7 @@ function Homepage() {
             })
     }
     useEffect(() => {
-        console.log(manaCount)
+
     }, [manaCount])
     useEffect(() => {
         allManaCost()
@@ -88,6 +92,12 @@ function Homepage() {
     }
     return (
         <div className="dark-theme">
+            <div>
+                <img src={"data:image/jpg;base64, " + homeWallpaper} alt="" />
+            </div>
+            <div className="welcome-div">
+                <b>Welcome!</b> Explore and create your new awesome MTG Deck!
+            </div>
             <div className="chart-container">
                 <ReactEcharts
                     option={{

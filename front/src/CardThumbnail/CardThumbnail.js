@@ -71,14 +71,13 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
     }, [cardDetail])
 
     useEffect(() => {
-        console.log(cardDetail)
         if (manaCounter !== undefined && manaCounter.length > 0) {
             manaCounter.map(item => {
                 if (item !== undefined && item.length > 0) {
-                    item.map(inner => {
+                    item.map((inner, index) => {
                         inner = replaceManaTagForNames(inner)
                         setManaTags(manaTags => [...manaTags,
-                        <div className="mana-counter-tag">
+                        <div key={index} className="mana-counter-tag">
                             <div className="mana-counter-color" style={{ background: inner.hex, color: inner.fontHex }}>
                                 {inner.color}
                             </div>
@@ -91,7 +90,6 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
                 }
             })
         }
-        // console.log(manaTags)
     }, [manaCounter])
 
     useEffect(() => {

@@ -28,7 +28,6 @@ export default function Authentication() {
     })
 
     useEffect(() => {
-        console.log(location)
         if (location.state != null && location.state != "") {
             setDialog(true)
         }
