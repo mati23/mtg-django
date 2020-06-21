@@ -211,14 +211,16 @@ function DeckDetails() {
     }
 
     const updateGrid = useCallback((event) => {
+        console.log(event)
         setSelectedAvatar(event)
 
     }, [])
     useEffect(() => {
         let response = axios.get("http://127.0.0.1:8001/avatar-image-list/").then(result => {
+            console.log(result)
             result.data.response.map((avatar, index) => {
                 setAvatarList(avatarList => [...avatarList,
-                <AvatarThumbnail index={index} avatar={avatar} updateGrid={updateGrid}>
+                <AvatarThumbnail index={index} avatar={avatar} updateGrid={updateGrid} imageName={avatar.name}>
 
                 </AvatarThumbnail>
                 ])

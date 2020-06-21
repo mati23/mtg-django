@@ -11,7 +11,7 @@ import { CardThumbNail } from '../CardThumbnail/CardThumbnail';
 import ReactEcharts from "echarts-for-react";
 import CardInformationContainerContextProvider from '../Context/Context';
 
-export default function AvatarThumbnail({ index, avatar, updateStyle, updateGrid }) {
+export default function AvatarThumbnail({ index, avatar, updateStyle, updateGrid, imageName }) {
     const [thumbnailStyle, setThumbnailStyle] = useState(false)
     const [props, setProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
     const [clicked, setClicked] = useState(true)
@@ -23,7 +23,7 @@ export default function AvatarThumbnail({ index, avatar, updateStyle, updateGrid
     const setActiveAvatar = (event) => {
         setAvatarIndex(parseInt(event.target.id))
         setAvatarSelected(parseInt(event.target.id))
-        updateGrid(parseInt(event.target.id))
+        updateGrid(imageName)
     }
 
     useEffect(() => {

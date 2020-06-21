@@ -97,6 +97,9 @@ function Homepage() {
             </div>
             <div className="welcome-div">
                 <b>Welcome!</b> Explore and create your new awesome MTG Deck!
+                <div>
+                    <i class="fas fa-heart orange-heart"></i>
+                </div>
             </div>
             <div className="chart-container">
                 <ReactEcharts

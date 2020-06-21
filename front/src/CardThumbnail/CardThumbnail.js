@@ -56,7 +56,7 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
     const [cardDetail, setCardDetail] = useState([])
     const [cardBlur, setCardBlur] = useState(false)
     const [cardInfoVisibility, setCardInfoVisibility] = useState(false)
-    const [props, setProps] = useSpring(() => ({ height: '0px', position: 'absolute', margin: '1em 0', opacity: '0', color: "#ddd", zIndex: '0' }))
+    const [props, setProps] = useSpring(() => ({ config: { duration: 250, tension: 500, friction: 1 }, height: '0px', position: 'absolute', margin: '1em 0', opacity: '0', color: "#ddd", zIndex: '5' }))
 
     const [manaTags, setManaTags] = useState([])
     const [manaCounter, setManaCounter] = useState([])
@@ -94,7 +94,7 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
 
     useEffect(() => {
         if (cardVisible === true) {
-            setProps({ height: '0px', opacity: '0', zIndex: '0' })
+            setProps({ height: '0px', opacity: '0', zIndex: '5' })
             setCardVisible(false)
         }
     }, [cardVisible])
@@ -151,9 +151,9 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
     useEffect(() => {
         if (cardInfoVisibility) {
             document.getElementsByClassName('chart-container')[0].style.opacity = '0';
-            setProps({ height: '700px', opacity: '1' })
+            setProps({ height: '700px', opacity: '1', zIndex: '5' })
         } else {
-            setProps({ height: '0px', opacity: '0' })
+            setProps({ height: '0px', opacity: '0', zIndex: '5' })
             document.getElementsByClassName('chart-container')[0].style.opacity = '1';
         }
     }, [cardInfoVisibility])
@@ -161,7 +161,7 @@ export const CardThumbNail = ({ item, data, updateCardList }) => {
     return (
         <div className="card-thumbnail">
             <div className="card-thumbnail-quantity" onMouseOver={showButtons} onMouseOut={hideButtons}>
-                <div style={{ visibility: quantityButtonsVisibility == true ? "visible" : "hidden" }}>
+                <div style={{ visibility: quantityButtonsVisibility == true ? "visible" : "hidden", zIndex: 1 }}>
                     <Button className="red-background card-quantity-button" size="small" variant="contained" onClick={() => decreaseCounter(item.id)}>
                         -
                 </Button>

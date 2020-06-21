@@ -134,7 +134,7 @@ def get_deck_by_user(request):
             for deck in Decks.objects.filter(user=int(request_info.get("userId"))):
                 image = ""
                 if(deck.image != None):
-                    image = get_image_thumbnail(deck.image+'.jpg')
+                    image = get_image_thumbnail(deck.image)
                 decks.append({"deck":deck.toJson(), "thumbnail":str(image, "utf-8")})
             return JsonResponse({"response": decks})
         else:
@@ -147,7 +147,7 @@ def  avatar_image_list(request):
         for file in os.listdir(path):
             with open(path+file, "rb") as image:
                 encoded_image = base64.b64encode(image.read())
-                images.append({"image":str(encoded_image, "utf-8")})
+                images.append({"image":str(encoded_image, "utf-8"), "name":file.title().lower()})
         return JsonResponse({"response": images})
     return JsonResponse({"response": "error"})
 
@@ -162,7 +162,7 @@ def create_new_deck(request):
             deck = Decks()
             deck.user_id = user.id
             deck.title = deck_name
-            deck.image = "avatar" + str(deck_avatar_id)
+            deck.image = str(deck_avatar_id)
             deck.save()
             return JsonResponse({"response":"success"})
     else:
